@@ -1,23 +1,23 @@
-categoryID;name
-1;Acceleration
-2;Angle
-3;Area
-4;Data
-5;Electric Charge
-6;Electric Current
-7;Energy
-8;Force
-9;Length
-10;Luminance
-11;Luminous Flux
-12;Mass
-13;Pressure
-14;Ratio
-15;Speed
-16;Temperature
-17;Temperature Gradient
-18;Time
-19;Torque
-20;Voltage
-21;Volume
-22;Work
+categoryID,name
+1,Acceleration
+2,Angle
+3,Area
+4,Data
+5,Electric Charge
+6,Electric Current
+7,Energy
+8,Force
+9,Length
+10,Luminance
+11,Luminous Flux
+12,Mass
+13,Pressure
+14,Ratio
+15,Speed
+16,Temperature
+17,Temperature Gradient
+18,Time
+19,Torque
+20,Voltage
+21,Volume
+22,Work
