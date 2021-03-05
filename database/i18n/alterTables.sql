@@ -12,7 +12,7 @@ alter table UnitAssignment
     
 alter table LocaleCurrency
 	add constraint LocaleCurrency_Country foreign key(country) references Country(`code`),
-    add constraint LocaleCurrency_Currency foreign key(currency) references Currency(currencyID);
+    add constraint LocaleCurrency_Currency foreign key(currency) references Currency(`code`);
     
 alter table LocaleLanguage
 	add constraint LocaleLanguage_Country foreign key(country) references Country(`code`),

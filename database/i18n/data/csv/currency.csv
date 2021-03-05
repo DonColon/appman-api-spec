@@ -1,0 +1,152 @@
+code,digitalCode,name,symbol
+AED,784,UAE Dirham,\u062f.\u0625
+AFN,971,Afghani,Af
+ALL,008,Lek,L
+AMD,051,Armenian Dram,\u0534
+AOA,973,Kwanza,Kz
+ARS,032,Argentine Peso,$
+AUD,036,Australian Dollar,$
+AWG,533,Aruban Guilder/Florin,\u0192
+AZN,944,Azerbaijanian Manat,\u043c\u0430\u043d
+BAM,977,Konvertibilna Marka,\u041a\u041c
+BBD,052,Barbados Dollar,$
+BDT,050,Taka,\u09f3
+BGN,975,Bulgarian Lev,\u043b\u0432
+BHD,048,Bahraini Dinar,\u0628.\u062f
+BIF,108,Burundi Franc,\u20a3
+BMD,060,Bermudian Dollar,$
+BND,096,Brunei Dollar,$
+BOB,068,Boliviano,Bs.
+BRL,986,Brazilian Real,R$
+BSD,044,Bahamian Dollar,$
+BTN,064,Ngultrum,
+BWP,072,Pula,P
+BYN,933,Belarusian Ruble,Br
+BZD,084,Belize Dollar,$
+CAD,124,Canadian Dollar,$
+CDF,976,Congolese Franc,\u20a3
+CHF,756,Swiss Franc,\u20a3
+CLP,152,Chilean Peso,$
+CNY,156,Yuan,\xa5
+COP,170,Colombian Peso,$
+CRC,188,Costa Rican Colon,\u20a1
+CUP,192,Cuban Peso,$
+CVE,132,Cape Verde Escudo,$
+CZK,203,Czech Koruna,K\u010d
+DJF,262,Djibouti Franc,\u20a3
+DKK,208,Danish Krone,kr
+DOP,214,Dominican Peso,$
+DZD,012,Algerian Dinar,\u062f.\u062c
+EGP,818,Egyptian Pound,\xa3
+ERN,232,Nakfa,Nfk
+ETB,230,Ethiopian Birr,
+EUR,978,Euro,\u20ac
+FJD,242,Fiji Dollar,$
+FKP,238,Falkland Islands Pound,\xa3
+GBP,826,Pound Sterling,\xa3
+GEL,981,Lari,\u10da
+GHS,936,Cedi,\u20b5
+GIP,292,Gibraltar Pound,\xa3
+GMD,270,Dalasi,D
+GNF,324,Guinea Franc,\u20a3
+GTQ,320,Quetzal,Q
+GYD,328,Guyana Dollar,$
+HKD,344,Hong Kong Dollar,$
+HNL,340,Lempira,L
+HRK,191,Croatian Kuna,Kn
+HTG,332,Gourde,G
+HUF,348,Forint,Ft
+IDR,360,Rupiah,Rp
+ILS,376,New Israeli Shekel,\u20aa
+INR,356,Indian Rupee,\u20b9
+IQD,368,Iraqi Dinar,\u0639.\u062f
+IRR,364,Iranian Rial,\ufdfc
+ISK,352,Iceland Krona,Kr
+JMD,388,Jamaican Dollar,$
+JOD,400,Jordanian Dinar,\u062f.\u0627
+JPY,392,Yen,\xa5
+KES,404,Kenyan Shilling,Sh
+KGS,417,Som,
+KHR,116,Riel,\u17db
+KPW,408,North Korean Won,\u20a9
+KRW,410,South Korean Won,\u20a9
+KWD,414,Kuwaiti Dinar,\u062f.\u0643
+KYD,136,Cayman Islands Dollar,$
+KZT,398,Tenge,\u3012
+LAK,418,Kip,\u20ad
+LBP,422,Lebanese Pound,\u0644.\u0644
+LKR,144,Sri Lanka Rupee,Rs
+LRD,430,Liberian Dollar,$
+LSL,426,Loti,L
+LYD,434,Libyan Dinar,\u0644.\u062f
+MAD,504,Moroccan Dirham,\u062f.\u0645.
+MDL,498,Moldovan Leu,L
+MGA,969,Malagasy Ariary,
+MKD,807,Denar,\u0434\u0435\u043d
+MMK,104,Kyat,K
+MNT,496,Tugrik,\u20ae
+MOP,446,Pataca,P
+MRU,929,Ouguiya,UM
+MUR,480,Mauritius Rupee,\u20a8
+MVR,462,Rufiyaa,\u0783.
+MWK,454,Kwacha,MK
+MXN,484,Mexican Peso,$
+MYR,458,Malaysian Ringgit,RM
+MZN,943,Metical,MTn
+NAD,516,Namibia Dollar,$
+NGN,566,Naira,\u20a6
+NIO,558,Cordoba Oro,C$
+NOK,578,Norwegian Krone,kr
+NPR,524,Nepalese Rupee,\u20a8
+NZD,554,New Zealand Dollar,$
+OMR,512,Rial Omani,\u0631.\u0639.
+PAB,590,Balboa,B/.
+PEN,604,Nuevo Sol,S/.
+PGK,598,Kina,K
+PHP,608,Philippine Peso,\u20b1
+PKR,586,Pakistan Rupee,\u20a8
+PLN,985,PZloty,z\u0142
+PYG,600,Guarani,\u20b2
+QAR,634,Qatari Rial,\u0631.\u0642
+RON,946,Leu,L
+RSD,941,Serbian Dinar,din
+RUB,643,Russian Ruble,\u0440. 
+RWF,646,Rwanda Franc,\u20a3
+SAR,682,Saudi Riyal,\u0631.\u0633
+SBD,090,Solomon Islands Dollar,$
+SCR,690,Seychelles Rupee,\u20a8
+SDG,938,Sudanese Pound,\xa3
+SEK,752,Swedish Krona,kr
+SGD,702,Singapore Dollar,$
+SHP,654,Saint Helena Pound,\xa3
+SLL,694,Leone,Le
+SOS,706,Somali Shilling,Sh
+SRD,968,Suriname Dollar,$
+STN,930,Dobra,Db
+SYP,760,Syrian Pound,\u0644.\u0633
+SZL,748,Lilangeni,L
+THB,764,Baht,\u0e3f
+TJS,972,Somoni,\u0405\u041c
+TMT,934,Manat,m
+TND,788,Tunisian Dinar,\u062f.\u062a
+TOP,776,Pa’anga,T$
+TRY,949,Turkish Lira,\u20a4
+TTD,780,Trinidad and Tobago Dollar,$
+TWD,901,Taiwan Dollar,$
+TZS,834,Tanzanian Shilling,Sh
+UAH,980,Hryvnia,\u20b4
+UGX,800,Uganda Shilling,Sh
+USD,840,US Dollar,$
+UYU,858,Peso Uruguayo,$
+UZS,860,Uzbekistan Sum,
+VEF,937,Bolivar Fuerte,Bs F
+VND,704,Dong,\u20ab
+VUV,548,Vatu,Vt
+WST,882,Tala,T
+XAF,950,CFA Franc BCEAO,\u20a3
+XCD,951,East Caribbean Dollar,$
+XPF,953,CFP Franc,\u20a3
+YER,886,Yemeni Rial,\ufdfc
+ZAR,710,Rand,R
+ZMW,967,Zambian Kwacha,ZK
+ZWL,932,Zimbabwe Dollar,$
