@@ -48,7 +48,7 @@ create table if not exists Currency(
 	`code` varchar(3) primary key,
     digitalCode varchar(3) unique not null,
     `name` varchar(64) not null,
-    symbol varchar(4)
+    symbol varchar(16) not null
 );
 
 create table if not exists LocaleCurrency(

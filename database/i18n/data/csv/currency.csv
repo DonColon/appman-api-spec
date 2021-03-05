@@ -19,7 +19,7 @@ BND,096,Brunei Dollar,$
 BOB,068,Boliviano,Bs.
 BRL,986,Brazilian Real,R$
 BSD,044,Bahamian Dollar,$
-BTN,064,Ngultrum,
+BTN,064,Ngultrum,BTN
 BWP,072,Pula,P
 BYN,933,Belarusian Ruble,Br
 BZD,084,Belize Dollar,$
@@ -39,7 +39,7 @@ DOP,214,Dominican Peso,$
 DZD,012,Algerian Dinar,\u062f.\u062c
 EGP,818,Egyptian Pound,\xa3
 ERN,232,Nakfa,Nfk
-ETB,230,Ethiopian Birr,
+ETB,230,Ethiopian Birr,ETB
 EUR,978,Euro,\u20ac
 FJD,242,Fiji Dollar,$
 FKP,238,Falkland Islands Pound,\xa3
@@ -66,7 +66,7 @@ JMD,388,Jamaican Dollar,$
 JOD,400,Jordanian Dinar,\u062f.\u0627
 JPY,392,Yen,\xa5
 KES,404,Kenyan Shilling,Sh
-KGS,417,Som,
+KGS,417,Som,KGS
 KHR,116,Riel,\u17db
 KPW,408,North Korean Won,\u20a9
 KRW,410,South Korean Won,\u20a9
@@ -81,7 +81,7 @@ LSL,426,Loti,L
 LYD,434,Libyan Dinar,\u0644.\u062f
 MAD,504,Moroccan Dirham,\u062f.\u0645.
 MDL,498,Moldovan Leu,L
-MGA,969,Malagasy Ariary,
+MGA,969,Malagasy Ariary,MGA
 MKD,807,Denar,\u0434\u0435\u043d
 MMK,104,Kyat,K
 MNT,496,Tugrik,\u20ae
@@ -138,7 +138,7 @@ UAH,980,Hryvnia,\u20b4
 UGX,800,Uganda Shilling,Sh
 USD,840,US Dollar,$
 UYU,858,Peso Uruguayo,$
-UZS,860,Uzbekistan Sum,
+UZS,860,Uzbekistan Sum,UZS
 VEF,937,Bolivar Fuerte,Bs F
 VND,704,Dong,\u20ab
 VUV,548,Vatu,Vt
