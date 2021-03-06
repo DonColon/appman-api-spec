@@ -1,0 +1,7 @@
+conditionID,name,description
+disclose-source,Disclose source,Source code must be made available when the licensed material is distributed.
+document-changes,State changes,Changes made to the licensed material must be documented.
+include-copyright,License and copyright notice,A copy of the license and copyright notice must be included with the licensed material.
+include-copyright--source,License and copyright notice for source,"A copy of the license and copyright notice must be included with the licensed material in source form, but is not required for binaries."
+network-use-disclose,Network use is distribution,Users who interact with the licensed material via network are given the right to receive a copy of the source code.
+same-license,Same license,Modifications must be released under the same license when distributing the licensed material. In some cases a similar or related license may be used.

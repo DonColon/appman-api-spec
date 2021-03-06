@@ -1,0 +1,5 @@
+limitationID,name,description
+liability,Liability,This license includes a limitation of liability.
+patent-use,Patent use,This license explicitly states that it does NOT grant any rights in the patents of contributors.
+trademark-use,Trademark use,"This license explicitly states that it does NOT grant trademark rights, even though licenses without such a statement probably do not grant any implicit trademark rights."
+warranty,Warranty,This license explicitly states that it does NOT provide any warranty.
