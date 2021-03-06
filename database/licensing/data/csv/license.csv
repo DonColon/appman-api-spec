@@ -1,5 +1,5 @@
-body,conditions,description,featured,html_url,implementation,key,limitations,name,node_id,permissions,spdx_id,url
-"                    GNU AFFERO GENERAL PUBLIC LICENSE
+licenseID,spdxID,name,description,url,content
+agpl-3.0,AGPL-3.0,GNU Affero General Public License v3.0,"Permissions of this strongest copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights. When a modified version is used to provide a service over a network, the complete source code of the modified version must be made available.",http://choosealicense.com/licenses/agpl-3.0/,"                    GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
@@ -660,8 +660,8 @@ specific requirements.
 if any, to sign a ""copyright disclaimer"" for the program, if necessary.
 For more information on this, and how to apply and follow the GNU AGPL, see
 <https://www.gnu.org/licenses/>.
-","['include-copyright', 'document-changes', 'disclose-source', 'network-use-disclose', 'same-license']","Permissions of this strongest copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights. When a modified version is used to provide a service over a network, the complete source code of the modified version must be made available.",False,http://choosealicense.com/licenses/agpl-3.0/,Create a text file (typically named LICENSE or LICENSE.txt) in the root of your source code and copy the text of the license into the file.,agpl-3.0,"['liability', 'warranty']",GNU Affero General Public License v3.0,MDc6TGljZW5zZTE=,"['commercial-use', 'modifications', 'distribution', 'patent-use', 'private-use']",AGPL-3.0,https://api.github.com/licenses/agpl-3.0
-"                                 Apache License
+"
+apache-2.0,Apache-2.0,Apache License 2.0,"A permissive license whose main conditions require preservation of copyright and license notices. Contributors provide an express grant of patent rights. Licensed works, modifications, and larger works may be distributed under different terms and without source code.",http://choosealicense.com/licenses/apache-2.0/,"                                 Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
 
@@ -862,8 +862,8 @@ For more information on this, and how to apply and follow the GNU AGPL, see
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-","['include-copyright', 'document-changes']","A permissive license whose main conditions require preservation of copyright and license notices. Contributors provide an express grant of patent rights. Licensed works, modifications, and larger works may be distributed under different terms and without source code.",True,http://choosealicense.com/licenses/apache-2.0/,Create a text file (typically named LICENSE or LICENSE.txt) in the root of your source code and copy the text of the license into the file.,apache-2.0,"['trademark-use', 'liability', 'warranty']",Apache License 2.0,MDc6TGljZW5zZTI=,"['commercial-use', 'modifications', 'distribution', 'patent-use', 'private-use']",Apache-2.0,https://api.github.com/licenses/apache-2.0
-"BSD 2-Clause License
+"
+bsd-2-clause,BSD-2-Clause,"BSD 2-Clause ""Simplified"" License","A permissive license that comes in two variants, the <a href=""/licenses/bsd-2-clause/"">BSD 2-Clause</a> and <a href=""/licenses/bsd-3-clause/"">BSD 3-Clause</a>. Both have very minute differences to the MIT license.",http://choosealicense.com/licenses/bsd-2-clause/,"BSD 2-Clause License
 
 Copyright (c) [year], [fullname]
 All rights reserved.
@@ -888,8 +888,8 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-",['include-copyright'],"A permissive license that comes in two variants, the <a href=""/licenses/bsd-2-clause/"">BSD 2-Clause</a> and <a href=""/licenses/bsd-3-clause/"">BSD 3-Clause</a>. Both have very minute differences to the MIT license.",False,http://choosealicense.com/licenses/bsd-2-clause/,Create a text file (typically named LICENSE or LICENSE.txt) in the root of your source code and copy the text of the license into the file. Replace [year] with the current year and [fullname] with the name (or names) of the copyright holders.,bsd-2-clause,"['liability', 'warranty']","BSD 2-Clause ""Simplified"" License",MDc6TGljZW5zZTQ=,"['commercial-use', 'modifications', 'distribution', 'private-use']",BSD-2-Clause,https://api.github.com/licenses/bsd-2-clause
-"BSD 3-Clause License
+"
+bsd-3-clause,BSD-3-Clause,"BSD 3-Clause ""New"" or ""Revised"" License","A permissive license similar to the <a href=""/licenses/bsd-2-clause/"">BSD 2-Clause License</a>, but with a 3rd clause that prohibits others from using the name of the project or its contributors to promote derived products without written consent.",http://choosealicense.com/licenses/bsd-3-clause/,"BSD 3-Clause License
 
 Copyright (c) [year], [fullname]
 All rights reserved.
@@ -918,8 +918,8 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-",['include-copyright'],"A permissive license similar to the <a href=""/licenses/bsd-2-clause/"">BSD 2-Clause License</a>, but with a 3rd clause that prohibits others from using the name of the project or its contributors to promote derived products without written consent.",False,http://choosealicense.com/licenses/bsd-3-clause/,Create a text file (typically named LICENSE or LICENSE.txt) in the root of your source code and copy the text of the license into the file. Replace [year] with the current year and [fullname] with the name (or names) of the copyright holders.,bsd-3-clause,"['liability', 'warranty']","BSD 3-Clause ""New"" or ""Revised"" License",MDc6TGljZW5zZTU=,"['commercial-use', 'modifications', 'distribution', 'private-use']",BSD-3-Clause,https://api.github.com/licenses/bsd-3-clause
-"Boost Software License - Version 1.0 - August 17th, 2003
+"
+bsl-1.0,BSL-1.0,Boost Software License 1.0,"A simple permissive license only requiring preservation of copyright and license notices for source (and not binary) distribution. Licensed works, modifications, and larger works may be distributed under different terms and without source code.",http://choosealicense.com/licenses/bsl-1.0/,"Boost Software License - Version 1.0 - August 17th, 2003
 
 Permission is hereby granted, free of charge, to any person or organization
 obtaining a copy of the software and accompanying documentation covered by
@@ -942,8 +942,8 @@ SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE
 FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
 ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
-",['include-copyright--source'],"A simple permissive license only requiring preservation of copyright and license notices for source (and not binary) distribution. Licensed works, modifications, and larger works may be distributed under different terms and without source code.",False,http://choosealicense.com/licenses/bsl-1.0/,Create a text file (typically named LICENSE or LICENSE.txt) in the root of your source code and copy the text of the license into the file.,bsl-1.0,"['liability', 'warranty']",Boost Software License 1.0,MDc6TGljZW5zZTI4,"['commercial-use', 'modifications', 'distribution', 'private-use']",BSL-1.0,https://api.github.com/licenses/bsl-1.0
-"Creative Commons Legal Code
+"
+cc0-1.0,CC0-1.0,Creative Commons Zero v1.0 Universal,"The <a href=""https://creativecommons.org/publicdomain/zero/1.0/"">Creative Commons CC0 Public Domain Dedication</a> waives copyright interest in a work you've created and dedicates it to the world-wide public domain. Use CC0 to opt out of copyright entirely and ensure your work has the widest reach. As with the Unlicense and typical software licenses, CC0 disclaims warranties. CC0 is very similar to the Unlicense.",http://choosealicense.com/licenses/cc0-1.0/,"Creative Commons Legal Code
 
 CC0 1.0 Universal
 
@@ -1064,8 +1064,8 @@ express Statement of Purpose.
  d. Affirmer understands and acknowledges that Creative Commons is not a
     party to this document and has no duty or obligation with respect to
     this CC0 or use of the Work.
-",[],"The <a href=""https://creativecommons.org/publicdomain/zero/1.0/"">Creative Commons CC0 Public Domain Dedication</a> waives copyright interest in a work you've created and dedicates it to the world-wide public domain. Use CC0 to opt out of copyright entirely and ensure your work has the widest reach. As with the Unlicense and typical software licenses, CC0 disclaims warranties. CC0 is very similar to the Unlicense.",False,http://choosealicense.com/licenses/cc0-1.0/,Create a text file (typically named LICENSE or LICENSE.txt) in the root of your source code and copy the text of the license into the file.,cc0-1.0,"['liability', 'trademark-use', 'patent-use', 'warranty']",Creative Commons Zero v1.0 Universal,MDc6TGljZW5zZTY=,"['commercial-use', 'modifications', 'distribution', 'private-use']",CC0-1.0,https://api.github.com/licenses/cc0-1.0
-"Eclipse Public License - v 2.0
+"
+epl-2.0,EPL-2.0,Eclipse Public License 2.0,"This commercially-friendly copyleft license provides the ability to commercially license binaries; a modern royalty-free patent license grant; and the ability for linked works to use other licenses, including commercial ones.",http://choosealicense.com/licenses/epl-2.0/,"Eclipse Public License - v 2.0
 
     THE ACCOMPANYING PROGRAM IS PROVIDED UNDER THE TERMS OF THIS ECLIPSE
     PUBLIC LICENSE (""AGREEMENT""). ANY USE, REPRODUCTION OR DISTRIBUTION
@@ -1342,8 +1342,8 @@ version(s), and exceptions or additional permissions here}.""
   look for such a notice.
 
   You may add additional accurate notices of copyright ownership.
-","['disclose-source', 'include-copyright', 'same-license']","This commercially-friendly copyleft license provides the ability to commercially license binaries; a modern royalty-free patent license grant; and the ability for linked works to use other licenses, including commercial ones.",False,http://choosealicense.com/licenses/epl-2.0/,Create a text file (typically named LICENSE or LICENSE.txt) in the root of your source code and copy the text of the license into the file.,epl-2.0,"['liability', 'warranty']",Eclipse Public License 2.0,MDc6TGljZW5zZTMy,"['commercial-use', 'distribution', 'modifications', 'patent-use', 'private-use']",EPL-2.0,https://api.github.com/licenses/epl-2.0
-"                    GNU GENERAL PUBLIC LICENSE
+"
+gpl-2.0,GPL-2.0,GNU General Public License v2.0,"The GNU GPL is the most widely used free software license and has a strong copyleft requirement. When distributing derived works, the source code of the work must be made available under the same license. There are multiple variants of the GNU GPL, each with different requirements.",http://choosealicense.com/licenses/gpl-2.0/,"                    GNU GENERAL PUBLIC LICENSE
                        Version 2, June 1991
 
  Copyright (C) 1989, 1991 Free Software Foundation, Inc.,
@@ -1682,8 +1682,8 @@ proprietary programs.  If your program is a subroutine library, you may
 consider it more useful to permit linking proprietary applications with the
 library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.
-","['include-copyright', 'document-changes', 'disclose-source', 'same-license']","The GNU GPL is the most widely used free software license and has a strong copyleft requirement. When distributing derived works, the source code of the work must be made available under the same license. There are multiple variants of the GNU GPL, each with different requirements.",False,http://choosealicense.com/licenses/gpl-2.0/,Create a text file (typically named LICENSE or LICENSE.txt) in the root of your source code and copy the text of the license into the file.,gpl-2.0,"['liability', 'warranty']",GNU General Public License v2.0,MDc6TGljZW5zZTg=,"['commercial-use', 'modifications', 'distribution', 'private-use']",GPL-2.0,https://api.github.com/licenses/gpl-2.0
-"                    GNU GENERAL PUBLIC LICENSE
+"
+gpl-3.0,GPL-3.0,GNU General Public License v3.0,"Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.",http://choosealicense.com/licenses/gpl-3.0/,"                    GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
@@ -2357,8 +2357,8 @@ may consider it more useful to permit linking proprietary applications with
 the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <https://www.gnu.org/licenses/why-not-lgpl.html>.
-","['include-copyright', 'document-changes', 'disclose-source', 'same-license']","Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.",True,http://choosealicense.com/licenses/gpl-3.0/,"Create a text file (typically named COPYING, as per GNU conventions) in the root of your source code and copy the text of the license into the file.",gpl-3.0,"['liability', 'warranty']",GNU General Public License v3.0,MDc6TGljZW5zZTk=,"['commercial-use', 'modifications', 'distribution', 'patent-use', 'private-use']",GPL-3.0,https://api.github.com/licenses/gpl-3.0
-"                  GNU LESSER GENERAL PUBLIC LICENSE
+"
+lgpl-2.1,LGPL-2.1,GNU Lesser General Public License v2.1,"Primarily used for software libraries, the GNU LGPL requires that derived works be licensed under the same license, but works that only link to it do not fall under this restriction. There are two commonly used versions of the GNU LGPL.",http://choosealicense.com/licenses/lgpl-2.1/,"                  GNU LESSER GENERAL PUBLIC LICENSE
                        Version 2.1, February 1999
 
  Copyright (C) 1991, 1999 Free Software Foundation, Inc.
@@ -2862,8 +2862,8 @@ necessary.  Here is a sample; alter the names:
   Ty Coon, President of Vice
 
 That's all there is to it!
-","['include-copyright', 'disclose-source', 'document-changes', 'same-license--library']","Primarily used for software libraries, the GNU LGPL requires that derived works be licensed under the same license, but works that only link to it do not fall under this restriction. There are two commonly used versions of the GNU LGPL.",False,http://choosealicense.com/licenses/lgpl-2.1/,Create a text file (typically named LICENSE or LICENSE.txt) in the root of your source code and copy the text of the license into the file.,lgpl-2.1,"['liability', 'warranty']",GNU Lesser General Public License v2.1,MDc6TGljZW5zZTEx,"['commercial-use', 'modifications', 'distribution', 'private-use']",LGPL-2.1,https://api.github.com/licenses/lgpl-2.1
-"MIT License
+"
+mit,MIT,MIT License,"A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.",http://choosealicense.com/licenses/mit/,"MIT License
 
 Copyright (c) [year] [fullname]
 
@@ -2884,8 +2884,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-",['include-copyright'],"A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.",True,http://choosealicense.com/licenses/mit/,Create a text file (typically named LICENSE or LICENSE.txt) in the root of your source code and copy the text of the license into the file. Replace [year] with the current year and [fullname] with the name (or names) of the copyright holders.,mit,"['liability', 'warranty']",MIT License,MDc6TGljZW5zZTEz,"['commercial-use', 'modifications', 'distribution', 'private-use']",MIT,https://api.github.com/licenses/mit
-"Mozilla Public License Version 2.0
+"
+mpl-2.0,MPL-2.0,Mozilla Public License 2.0,"Permissions of this weak copyleft license are conditioned on making available source code of licensed files and modifications of those files under the same license (or in certain cases, one of the GNU licenses). Copyright and license notices must be preserved. Contributors provide an express grant of patent rights. However, a larger work using the licensed work may be distributed under different terms and without source code for files added in the larger work.",http://choosealicense.com/licenses/mpl-2.0/,"Mozilla Public License Version 2.0
 ==================================
 
 1. Definitions
@@ -3258,8 +3258,8 @@ Exhibit B - ""Incompatible With Secondary Licenses"" Notice
 
   This Source Code Form is ""Incompatible With Secondary Licenses"", as
   defined by the Mozilla Public License, v. 2.0.
-","['disclose-source', 'include-copyright', 'same-license--file']","Permissions of this weak copyleft license are conditioned on making available source code of licensed files and modifications of those files under the same license (or in certain cases, one of the GNU licenses). Copyright and license notices must be preserved. Contributors provide an express grant of patent rights. However, a larger work using the licensed work may be distributed under different terms and without source code for files added in the larger work.",False,http://choosealicense.com/licenses/mpl-2.0/,Create a text file (typically named LICENSE or LICENSE.txt) in the root of your source code and copy the text of the license into the file.,mpl-2.0,"['liability', 'trademark-use', 'warranty']",Mozilla Public License 2.0,MDc6TGljZW5zZTE0,"['commercial-use', 'modifications', 'distribution', 'patent-use', 'private-use']",MPL-2.0,https://api.github.com/licenses/mpl-2.0
-"This is free and unencumbered software released into the public domain.
+"
+unlicense,Unlicense,The Unlicense,"A license with no conditions whatsoever which dedicates works to the public domain. Unlicensed works, modifications, and larger works may be distributed under different terms and without source code.",http://choosealicense.com/licenses/unlicense/,"This is free and unencumbered software released into the public domain.
 
 Anyone is free to copy, modify, publish, use, compile, sell, or
 distribute this software, either in source code form or as a compiled
@@ -3283,4 +3283,4 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
-",[],"A license with no conditions whatsoever which dedicates works to the public domain. Unlicensed works, modifications, and larger works may be distributed under different terms and without source code.",False,http://choosealicense.com/licenses/unlicense/,Create a text file (typically named UNLICENSE or UNLICENSE.txt) in the root of your source code and copy the text of the license disclaimer into the file.,unlicense,"['liability', 'warranty']",The Unlicense,MDc6TGljZW5zZTE1,"['private-use', 'commercial-use', 'modifications', 'distribution']",Unlicense,https://api.github.com/licenses/unlicense
+"
