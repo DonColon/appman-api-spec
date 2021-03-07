@@ -37,6 +37,7 @@ create table if not exists Application(
     `description` varchar(256) not null,
     homepageUrl varchar(256),
     author bigint not null,
+    license varchar(16) not null,
     modifiedBy bigint not null,
     modifiedOn datetime not null
 );

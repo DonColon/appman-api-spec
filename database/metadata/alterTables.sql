@@ -1,3 +1,7 @@
+alter table Application
+	add constraint Application_Developer foreign key(author) references Developer(developerID),
+    add constraint Application_License foreign key(license) references License(licenseID);
+
 alter table Collaborator
 	add constraint Collaborator_Developer foreign key(developer) references Developer(developerID),
     add constraint Collaborator_Application foreign key(app) references Application(appID);
