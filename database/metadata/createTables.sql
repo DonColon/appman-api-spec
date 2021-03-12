@@ -3,7 +3,7 @@ create table if not exists Developer(
     firstName varchar(64) not null,
     familyName varchar(64) not null,
     userName varchar(64) not null,
-    email varchar(64) not null,
+    email varchar(256) not null,
     phoneNumber varchar(16),
     mobileNumber varchar(16) not null
 );
@@ -17,7 +17,7 @@ create table if not exists Collaborator(
 create table if not exists `System`(
 	systemID bigint auto_increment primary key,
     `name` varchar(64) not null,
-    `description` varchar(256) not null,
+    `description` varchar(128) not null,
     docUrl varchar(256) not null,
     modifiedBy bigint not null,
     modifiedOn datetime not null
@@ -34,8 +34,11 @@ create table if not exists SystemVersion(
 create table if not exists Application(
 	appID bigint auto_increment primary key,
     `name` varchar(64) not null,
-    `description` varchar(256) not null,
+    `description` varchar(128) not null,
     homepageUrl varchar(256),
+    repositoryUrl varchar(256),
+    gitUrl varchar(256),
+    issueUrl varchar(256),
     author bigint not null,
     license varchar(16) not null,
     modifiedBy bigint not null,
@@ -53,8 +56,8 @@ create table if not exists ApplicationVersion(
 create table if not exists `View`(
 	viewID bigint auto_increment primary key,
     `name` varchar(64) not null,
-    `description` varchar(256) not null,
-    route varchar(256) not null,
+    `description` varchar(128) not null,
+    route varchar(128) not null,
     modifiedBy bigint not null,
     modifiedOn datetime not null
 );
@@ -70,7 +73,7 @@ create table if not exists ViewVersion(
 create table if not exists `Component`(
 	componentID bigint auto_increment primary key,
     `name` varchar(64) not null,
-	`description` varchar(256) not null,
+	`description` varchar(128) not null,
 	modifiedBy bigint not null,
     modifiedOn datetime not null
 );
@@ -125,31 +128,31 @@ create table if not exists SubComponent(
 
 create table if not exists DataType(
 	typeID bigint auto_increment primary key,
-    `description` varchar(256) not null
+    `description` varchar(128) not null
 );
 
 create table if not exists DataFormat(
 	formatID bigint auto_increment primary key,
     `type` bigint not null,
-    `description` varchar(256) not null,
+    `description` varchar(128) not null,
     format varchar(256) not null
 );
 
 create table if not exists NumberFormat(
 	formatID bigint primary key,
-    `min` decimal(30, 30) not null,
-    `max` decimal(30, 30) not null
+    `min` double precision not null,
+    `max` double precision not null
 );
 
 create table if not exists ParameterType(
 	typeID bigint auto_increment primary key,
-    `description` varchar(256) not null
+    `description` varchar(128) not null
 );
 
 create table if not exists Parameter(
 	parameterID bigint auto_increment primary key,
     `name` varchar(64) not null,
-	`description` varchar(256) not null,
+	`description` varchar(128) not null,
 	modifiedBy bigint not null,
     modifiedOn datetime not null
 );

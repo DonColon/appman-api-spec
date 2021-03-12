@@ -58,14 +58,14 @@ create table if not exists LocaleCurrency(
 );
 
 create table if not exists Language(
-	`code` varchar(2) primary key,
+	`code` varchar(3) primary key,
 	`name` varchar(64) not null,
     nativeName varchar(64) not null
 );
 
 create table if not exists LocaleLanguage(
 	country varchar(2),
-    `language` varchar(2),
+    `language` varchar(3),
     isOfficial boolean not null,
     primary key(country, `language`)
 );

@@ -6,7 +6,7 @@ create table if not exists MonitoringGroup(
 create table if not exists Metric(
 	metricID bigint auto_increment primary key,
     `name` varchar(64) not null,
-    `description` varchar(256) not null,
+    `description` varchar(128) not null,
     monitoringGroup bigint not null,
     unit bigint
 );
@@ -18,6 +18,6 @@ create table if not exists Measurement(
     addedOn datetime,
     `system` bigint,
     systemVersion varchar(16),
-    `value` decimal(30, 30),
+    `value` double precision not null,
     primary key(app, appVersion, metric, addedOn)
 );
