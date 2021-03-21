@@ -19,6 +19,6 @@ drop table if exists LocaleDate;
 drop table if exists TimeFormat;
 drop table if exists LocaleTime;
 drop table if exists Timezone;
-drop table if exists LocaleZone;
+drop table if exists LocaleTimezone;
 
 set foreign_key_checks=1;

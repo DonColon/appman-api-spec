@@ -1,53 +1,53 @@
 create table if not exists Country(
 	`code` varchar(2) primary key,
     `key` varchar(3) unique not null,
-    `name` varchar(64) not null,
+    `name` varchar(64) unique not null,
     dialingCode varchar(8) not null,
-    addressFormat bigint not null,
-    numberSeparator bigint not null,
-    unitSystem bigint not null
+    addressFormat tinyint unsigned not null,
+    numberSeparator tinyint unsigned not null,
+    unitSystem tinyint unsigned not null
 );
 
 create table if not exists AddressFormat(
-	formatID bigint auto_increment primary key,
-    `format` varchar(256) not null
+	formatID tinyint unsigned auto_increment primary key,
+    `format` varchar(256) unique not null
 );
 
 create table if not exists NumberSeparator(
-	separatorID bigint auto_increment primary key,
+	separatorID tinyint unsigned auto_increment primary key,
     decimalSeparator varchar(1) not null,
     thousandSeparator varchar(1) not null
 );
 
 create table if not exists UnitSystem(
-	systemID bigint auto_increment primary key,
-    `name` varchar(64) not null
+	systemID tinyint unsigned auto_increment primary key,
+    `name` varchar(64) unique not null
 );
 
 create table if not exists UnitCategory(
-	categoryID bigint auto_increment primary key,
-    `name` varchar(64) not null
+	categoryID tinyint unsigned auto_increment primary key,
+    `name` varchar(64) unique not null
 );
 
 create table if not exists Unit(
-	unitID bigint auto_increment primary key,
-    `name` varchar(64) not null,
-    abbreviation varchar(16) not null,
+	unitID smallint unsigned auto_increment primary key,
+    `name` varchar(64) unique not null,
+    abbreviation varchar(16) unique not null,
     factor double precision not null,
     `offset` real not null,
-    category bigint not null
+    category tinyint unsigned not null
 );
 
 create table if not exists UnitAssignment(
-	`system` bigint,
-    unit bigint,
+	`system` tinyint unsigned,
+    unit smallint unsigned,
     primary key(`system`, unit)
 );
 
 create table if not exists Currency(
 	`code` varchar(3) primary key,
     digitalCode varchar(3) unique not null,
-    `name` varchar(64) not null,
+    `name` varchar(64) unique not null,
     symbol varchar(16) not null
 );
 
@@ -59,8 +59,8 @@ create table if not exists LocaleCurrency(
 
 create table if not exists Language(
 	`code` varchar(3) primary key,
-	`name` varchar(64) not null,
-    nativeName varchar(64) not null
+	`name` varchar(64) unique not null,
+    nativeName varchar(64) unique not null
 );
 
 create table if not exists LocaleLanguage(
@@ -71,38 +71,38 @@ create table if not exists LocaleLanguage(
 );
 
 create table if not exists DateFormat(
-	formatID bigint auto_increment primary key,
-    `format` varchar(32) not null
+	formatID smallint unsigned auto_increment primary key,
+    `format` varchar(32) unique not null
 );
 
 create table if not exists LocaleDate(
 	country varchar(2),
-    `format` bigint,
+    `format` smallint unsigned,
     displayStyle varchar(16),
     primary key(country, `format`)
 );
 
 create table if not exists TimeFormat(
-	formatID bigint auto_increment primary key,
-    format varchar(32) not null
+	formatID smallint unsigned auto_increment primary key,
+    format varchar(32) unique not null
 );
 
 create table if not exists LocaleTime(
 	country varchar(2),
-    `format` bigint,
+    `format` smallint unsigned,
     displayStyle varchar(16),
     primary key(country, `format`)
 );
 
 create table if not exists Timezone(
-	zoneID bigint auto_increment primary key,
-    zone varchar(32) not null,
+	zoneID smallint unsigned auto_increment primary key,
+    `name` varchar(32) unique not null,
     `offset` varchar(8) not null,
     offsetDST varchar(8) not null
 );
 
-create table if not exists LocaleZone(
+create table if not exists LocaleTimezone(
 	country varchar(2),
-    zone bigint,
-    primary key(country, zone)
+    timezone smallint unsigned,
+    primary key(country, timezone)
 );

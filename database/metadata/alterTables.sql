@@ -7,16 +7,20 @@ alter table Collaborator
     add constraint Collaborator_Application foreign key(app) references Application(appID);
     
 alter table SystemVersion
-	add constraint SystemVersion_System foreign key(`system`) references `System`(systemID);
+	add constraint SystemVersion_System foreign key(`system`) references `System`(systemID),
+	add constraint SystemVersion_Version check(version regexp '(?<Major>0|(?:[1-9]\d*))(?:\.(?<Minor>0|(?:[1-9]\d*))(?:\.(?<Patch>0|(?:[1-9]\d*))))');
     
 alter table ApplicationVersion
-	add constraint ApplicationVersion_Application foreign key(app) references Application(appID);
+	add constraint ApplicationVersion_Application foreign key(app) references Application(appID),
+    add constraint ApplicationVersion_Version check(version regexp '(?<Major>0|(?:[1-9]\d*))(?:\.(?<Minor>0|(?:[1-9]\d*))(?:\.(?<Patch>0|(?:[1-9]\d*))))');
     
 alter table ViewVersion
-	add constraint ViewVersion_View foreign key(`view`) references `View`(viewID);
+	add constraint ViewVersion_View foreign key(`view`) references `View`(viewID),
+    add constraint ViewVersion_Version check(version regexp '(?<Major>0|(?:[1-9]\d*))(?:\.(?<Minor>0|(?:[1-9]\d*))(?:\.(?<Patch>0|(?:[1-9]\d*))))');
     
 alter table ComponentVersion
-	add constraint ComponentVersion_Component foreign key(`component`) references `Component`(componentID);
+	add constraint ComponentVersion_Component foreign key(`component`) references `Component`(componentID),
+    add constraint ComponentVersion_Version check(version regexp '(?<Major>0|(?:[1-9]\d*))(?:\.(?<Minor>0|(?:[1-9]\d*))(?:\.(?<Patch>0|(?:[1-9]\d*))))');
 
 alter table BackendSystem
 	add constraint BackendSystem_SystemVersion foreign key(`system`, systemVersion) references SystemVersion(`system`, version),
@@ -43,7 +47,8 @@ alter table NumberFormat
 alter table ParameterVersion
 	add constraint ParameterVersion_Parameter foreign key(parameter) references Parameter(parameterID),
     add constraint ParameterVersion_DataFormat foreign key(`format`) references DataFormat(formatID),
-    add constraint ParameterVersion_ParameterType foreign key(`type`) references ParameterType(typeID);
+    add constraint ParameterVersion_ParameterType foreign key(`type`) references ParameterType(typeID),
+    add constraint ParameterVersion_Version check(version regexp '(?<Major>0|(?:[1-9]\d*))(?:\.(?<Minor>0|(?:[1-9]\d*))(?:\.(?<Patch>0|(?:[1-9]\d*))))');
     
 alter table ApplicationParameter
 	add constraint ApplicationParameter_ApplicationVersion foreign key(app, appVersion) references ApplicationVersion(app, version),

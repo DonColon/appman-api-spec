@@ -26,6 +26,6 @@ alter table LocaleTime
 	add constraint LocaleTime_Country foreign key(country) references Country(`code`),
     add constraint LocaleTime_TimeFormat foreign key(`format`) references TimeFormat(formatID);
     
-alter table LocaleZone
-	add constraint LocaleZone_Country foreign key(country) references Country(`code`),
-    add constraint LocaleZone_Timezone foreign key(zone) references Timezone(zoneID);
+alter table LocaleTimezone
+	add constraint LocaleTimezone_Country foreign key(country) references Country(`code`),
+    add constraint LocaleTimezone_Timezone foreign key(timezone) references Timezone(zoneID);

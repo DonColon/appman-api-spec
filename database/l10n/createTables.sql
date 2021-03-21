@@ -1,5 +1,5 @@
 create table if not exists Localization(
-	app bigint,
+	app int unsigned,
     appVersion varchar(16),
     country varchar(2),
     primary key(app, appVersion, country)
@@ -16,7 +16,7 @@ create table if not exists `Text`(
 );
 
 create table if not exists ApplicationText(
-	app bigint,
+	app int unsigned,
     appVersion varchar(16),
 	`text` varchar(64),
     country varchar(2),
@@ -25,7 +25,7 @@ create table if not exists ApplicationText(
 );
 
 create table if not exists ViewText(
-	`view` bigint,
+	`view` int unsigned,
     viewVersion varchar(16),
 	`text` varchar(64),
     country varchar(2),
@@ -34,7 +34,7 @@ create table if not exists ViewText(
 );
 
 create table if not exists ComponentText(
-	`component` bigint,
+	`component` int unsigned,
     componentVersion varchar(16),
 	`text` varchar(64),
     country varchar(2),

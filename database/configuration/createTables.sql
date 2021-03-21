@@ -1,9 +1,9 @@
 create table if not exists ApplicationConfiguration(
-	app bigint,
+	app int unsigned,
     appVersion varchar(16),
-    parameter bigint,
+    parameter int unsigned,
     parameterVersion varchar(16),
-    sequence bigint,
+    sequence int unsigned,
 	operator varchar(16) not null,
     `value` varchar(1024) not null,
     other varchar(1024) not null,
@@ -11,11 +11,11 @@ create table if not exists ApplicationConfiguration(
 );
 
 create table if not exists ViewConfiguration(
-	`view` bigint,
+	`view` int unsigned,
     viewVersion varchar(16),
-    parameter bigint,
+    parameter int unsigned,
     parameterVersion varchar(16),
-	sequence bigint,
+	sequence int unsigned,
 	operator varchar(16) not null,
     `value` varchar(1024) not null,
     other varchar(1024) not null,
@@ -23,11 +23,11 @@ create table if not exists ViewConfiguration(
 );
 
 create table if not exists ComponentConfiguration(
-	`component` bigint,
+	`component` int unsigned,
     componentVersion varchar(16),
-    parameter bigint,
+    parameter int unsigned,
     parameterVersion varchar(16),
-	sequence bigint,
+	sequence int unsigned,
 	operator varchar(16) not null,
     `value` varchar(1024) not null,
     other varchar(1024) not null,

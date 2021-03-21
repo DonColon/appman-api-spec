@@ -1,38 +1,38 @@
 create table if not exists LogType(
-	typeID int auto_increment primary key,
-    `name` varchar(64) not null
+	typeID tinyint unsigned auto_increment primary key,
+    `name` varchar(64) unique not null
 );
 
 create table if not exists LogLevel(
-	levelID int auto_increment primary key,
-    `type` int not null,
-    `name` varchar(64) not null
+	levelID tinyint unsigned auto_increment primary key,
+    `type` tinyint unsigned not null,
+    `name` varchar(64) unique not null
 );
 
 create table if not exists LogRecord(
-	logID bigint auto_increment primary key,
+	logID bigint unsigned auto_increment primary key,
     eventName varchar(64) not null,
-    `level` int not null,
+    `level` tinyint unsigned not null,
     levelText varchar(64) not null,
-    app bigint not null,
+    app int unsigned not null,
     appVersion varchar(16) not null,
-    `system` bigint not null,
+    `system` int unsigned not null,
     systemVersion varchar(16) not null,
     `timestamp` datetime not null,
     traceID bigint
 );
 
 create table if not exists LogAttribute(
-	log bigint,
+	log bigint unsigned,
     `key` varchar(64),
     `value` varchar(1024) not null,
     primary key(log, `key`)
 );
 
 create table if not exists LogBody(
-	bodyID bigint auto_increment primary key,
-    log bigint not null,
+	bodyID bigint unsigned auto_increment primary key,
+    log bigint unsigned not null,
 	`key` varchar(64),
     `value` varchar(1024),
-    parent bigint
+    parent bigint unsigned
 );

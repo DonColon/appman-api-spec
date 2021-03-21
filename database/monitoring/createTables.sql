@@ -1,22 +1,22 @@
 create table if not exists MonitoringGroup(
-	groupID bigint auto_increment primary key,
-    `name` varchar(64) not null
+	groupID tinyint unsigned auto_increment primary key,
+    `name` varchar(64) unique not null
 );
 
 create table if not exists Metric(
-	metricID bigint auto_increment primary key,
-    `name` varchar(64) not null,
+	metricID int unsigned auto_increment primary key,
+    `name` varchar(64) unique not null,
     `description` varchar(128) not null,
-    monitoringGroup bigint not null,
-    unit bigint
+    monitoringGroup tinyint unsigned not null,
+    unit smallint unsigned
 );
 
 create table if not exists Measurement(
-	app bigint,
+	app int unsigned,
     appVersion varchar(16),
-    metric bigint,
+    metric int unsigned,
     addedOn datetime,
-    `system` bigint,
+    `system` int unsigned,
     systemVersion varchar(16),
     `value` double precision not null,
     primary key(app, appVersion, metric, addedOn)
