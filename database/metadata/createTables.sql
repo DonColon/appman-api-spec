@@ -171,6 +171,19 @@ create table if not exists ParameterVersion(
     primary key(parameter, version)
 );
 
+create table if not exists Operator(
+	operatorID varchar(3) primary key,
+    `name` varchar(64) unique not null,
+    inputNumber tinyint unsigned not null
+);
+
+create table if not exists ParameterOperator(
+	parameter int unsigned,
+    parameterVersion varchar(16),
+	operator varchar(3),
+    primary key(parameter, parameterVersion, operator)
+);
+
 create table if not exists ApplicationParameter(
 	app int unsigned,
     appVersion varchar(16),

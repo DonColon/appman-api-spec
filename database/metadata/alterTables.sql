@@ -50,6 +50,10 @@ alter table ParameterVersion
     add constraint ParameterVersion_ParameterType foreign key(`type`) references ParameterType(typeID),
     add constraint ParameterVersion_Version check(version regexp '(?<Major>0|(?:[1-9]\d*))(?:\.(?<Minor>0|(?:[1-9]\d*))(?:\.(?<Patch>0|(?:[1-9]\d*))))');
     
+alter table ParameterOperator
+	add constraint ParameterOperator_ParameterVersion foreign key(parameter, parameterVersion) references ParameterVersion(parameter, version),
+    add constraint ParameterOperator_Operator foreign key(operator) references Operator(operatorID);
+    
 alter table ApplicationParameter
 	add constraint ApplicationParameter_ApplicationVersion foreign key(app, appVersion) references ApplicationVersion(app, version),
     add constraint ApplicationParameter_ParameterVersion foreign key(parameter, parameterVersion) references ParameterVersion(parameter, version);
