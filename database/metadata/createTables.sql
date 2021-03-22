@@ -133,9 +133,9 @@ create table if not exists DataType(
 
 create table if not exists DataFormat(
 	formatID int unsigned auto_increment primary key,
-    `type` int unsigned not null,
     `name` varchar(64) unique not null,
-    `format` varchar(1024) not null
+    `format` varchar(1024) not null,
+	`type` int unsigned not null
 );
 
 create table if not exists NumberFormat(
@@ -181,6 +181,8 @@ create table if not exists ParameterOperator(
 	parameter int unsigned,
     parameterVersion varchar(16),
 	operator varchar(3),
+	addedBy smallint unsigned not null,
+    addedOn datetime not null,
     primary key(parameter, parameterVersion, operator)
 );
 

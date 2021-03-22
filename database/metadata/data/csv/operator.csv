@@ -1,0 +1,15 @@
+operatorID,name,inputNumber
+BT,Between,2
+CT,Contains,1
+EQ,Equals,1
+EW,Ends with,1
+GE,Greater equal,1
+GT,Greater than,1
+LE,Less equal,1
+LT,Less than,1
+NB,Not between,2
+NCT,Not contains,1
+NE,Not equals,1
+NEW,Not ends with,1
+NSW,Not starts with,1
+SW,Starts with,1
