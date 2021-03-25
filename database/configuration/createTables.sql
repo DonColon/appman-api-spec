@@ -7,6 +7,8 @@ create table if not exists ApplicationConfiguration(
 	operator varchar(3) not null,
     `value` varchar(1024) not null,
     other varchar(1024) not null,
+	modifiedBy smallint unsigned not null,
+    modifiedOn datetime not null,
     primary key(app, appVersion, parameter, parameterVersion, sequence)
 );
 
@@ -21,6 +23,8 @@ create table if not exists ViewConfiguration(
 	operator varchar(3) not null,
     `value` varchar(1024) not null,
     other varchar(1024) not null,
+	modifiedBy smallint unsigned not null,
+    modifiedOn datetime not null,
     primary key(app, appVersion, `view`, viewVersion, parameter, parameterVersion, sequence)
 );
 
@@ -37,5 +41,7 @@ create table if not exists ComponentConfiguration(
 	operator varchar(3) not null,
     `value` varchar(1024) not null,
     other varchar(1024) not null,
+	modifiedBy smallint unsigned not null,
+    modifiedOn datetime not null,
     primary key(app, appVersion, `view`, viewVersion, `component`, componentVersion, parameter, parameterVersion, sequence)
 );

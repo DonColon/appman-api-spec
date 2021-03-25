@@ -19,7 +19,7 @@ create table if not exists LogRecord(
     `system` int unsigned not null,
     systemVersion varchar(16) not null,
     `timestamp` datetime not null,
-    traceID bigint
+    traceID bigint unsigned
 );
 
 create table if not exists LogAttribute(

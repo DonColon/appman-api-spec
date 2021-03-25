@@ -20,6 +20,8 @@ drop table if exists DataType;
 drop table if exists DataFormat;
 drop table if exists NumberFormat;
 drop table if exists ParameterType;
+drop table if exists Operator;
+drop table if exists ParameterOperator;
 
 drop table if exists Parameter;
 drop table if exists ParameterVersion;
