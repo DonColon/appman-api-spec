@@ -2,7 +2,7 @@ create table if not exists MonitoringGroup(
 	groupID tinyint unsigned auto_increment primary key,
     `name` varchar(64) unique not null,
 	modifiedBy smallint unsigned not null,
-    modifiedOn datetime not null
+    modifiedOn datetime not null default current_timestamp on update current_timestamp
 );
 
 create table if not exists Metric(
@@ -12,7 +12,7 @@ create table if not exists Metric(
     monitoringGroup tinyint unsigned not null,
     unit smallint unsigned,
 	modifiedBy smallint unsigned not null,
-    modifiedOn datetime not null
+    modifiedOn datetime not null default current_timestamp on update current_timestamp
 );
 
 create table if not exists Dimension(
@@ -20,14 +20,14 @@ create table if not exists Dimension(
 	`name` varchar(64) unique not null,
     `description` varchar(128) not null,
 	modifiedBy smallint unsigned not null,
-    modifiedOn datetime not null
+    modifiedOn datetime not null default current_timestamp on update current_timestamp
 );
 
 create table if not exists DimensionExpression(
 	dimension int unsigned,
     expression varchar(64),
 	addedBy smallint unsigned not null,
-    addedOn datetime not null,
+    addedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(dimension, expression)
 );
 
@@ -35,7 +35,7 @@ create table if not exists MetricDimension(
 	metric int unsigned,
     dimension int unsigned,
 	addedBy smallint unsigned not null,
-    addedOn datetime not null,
+    addedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(metric, dimension)
 );
 
@@ -45,7 +45,7 @@ create table if not exists Measurement(
     metric int unsigned,
 	dimension int unsigned,
     expression varchar(64),
-    addedOn datetime,
+    addedOn datetime default current_timestamp,
     `system` int unsigned,
     systemVersion varchar(16),
     `value` double precision not null,

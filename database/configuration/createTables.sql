@@ -8,7 +8,7 @@ create table if not exists ApplicationConfiguration(
     `value` varchar(1024) not null,
     other varchar(1024) not null,
 	modifiedBy smallint unsigned not null,
-    modifiedOn datetime not null,
+    modifiedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(app, appVersion, parameter, parameterVersion, sequence)
 );
 
@@ -24,7 +24,7 @@ create table if not exists ViewConfiguration(
     `value` varchar(1024) not null,
     other varchar(1024) not null,
 	modifiedBy smallint unsigned not null,
-    modifiedOn datetime not null,
+    modifiedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(app, appVersion, `view`, viewVersion, parameter, parameterVersion, sequence)
 );
 
@@ -42,6 +42,6 @@ create table if not exists ComponentConfiguration(
     `value` varchar(1024) not null,
     other varchar(1024) not null,
 	modifiedBy smallint unsigned not null,
-    modifiedOn datetime not null,
+    modifiedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(app, appVersion, `view`, viewVersion, `component`, componentVersion, parameter, parameterVersion, sequence)
 );

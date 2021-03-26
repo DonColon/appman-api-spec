@@ -4,6 +4,7 @@ create table if not exists Developer(
     familyName varchar(64) not null,
     userName varchar(64) unique not null,
     email varchar(256) unique not null,
+    `password` char(64) not null,
     phoneNumber varchar(16),
     mobileNumber varchar(16) not null
 );
@@ -20,14 +21,14 @@ create table if not exists `System`(
     `description` varchar(128) not null,
     docUrl varchar(256) not null,
     modifiedBy smallint unsigned not null,
-    modifiedOn datetime not null
+    modifiedOn datetime not null default current_timestamp on update current_timestamp
 );
 
 create table if not exists SystemVersion(
 	`system` int unsigned,
     version varchar(16),
     addedBy smallint unsigned not null,
-    addedOn datetime not null,
+    addedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(`system`, version)
 );
 
@@ -42,14 +43,14 @@ create table if not exists Application(
     author smallint unsigned not null,
     license varchar(16) not null,
     modifiedBy smallint unsigned not null,
-    modifiedOn datetime not null
+    modifiedOn datetime not null default current_timestamp on update current_timestamp
 );
 
 create table if not exists ApplicationVersion(
 	app int unsigned,
     version varchar(16),
     addedBy smallint unsigned not null,
-    addedOn datetime not null,
+    addedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(app, version)
 );
 
@@ -59,14 +60,14 @@ create table if not exists `View`(
     `description` varchar(128) not null,
     route varchar(128) not null,
     modifiedBy smallint unsigned not null,
-    modifiedOn datetime not null
+    modifiedOn datetime not null default current_timestamp on update current_timestamp
 );
 
 create table if not exists ViewVersion(
 	`view` int unsigned,
     version varchar(16),
     addedBy smallint unsigned not null,
-    addedOn datetime not null,
+    addedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(`view`, version)
 );
 
@@ -75,14 +76,14 @@ create table if not exists `Component`(
     `name` varchar(64) unique not null,
 	`description` varchar(128) not null,
 	modifiedBy smallint unsigned not null,
-    modifiedOn datetime not null
+    modifiedOn datetime not null default current_timestamp on update current_timestamp
 );
 
 create table if not exists ComponentVersion(
 	`component` int unsigned,
     version varchar(16),
 	addedBy smallint unsigned not null,
-    addedOn datetime not null,
+    addedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(`component`, version)
 );
 
@@ -92,7 +93,7 @@ create table if not exists BackendSystem(
 	app int unsigned,
     appVersion varchar(16),
 	addedBy smallint unsigned not null,
-    addedOn datetime not null,
+    addedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(`system`, systemVersion, app, appVersion)
 );
 
@@ -102,7 +103,7 @@ create table if not exists ApplicationView(
     `view` int unsigned,
     viewVersion varchar(16),
 	addedBy smallint unsigned not null,
-    addedOn datetime not null,
+    addedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(app, appVersion, `view`, viewVersion)
 );
 
@@ -112,7 +113,7 @@ create table if not exists ViewComponent(
 	`component` int unsigned,
     componentVersion varchar(16),
 	addedBy smallint unsigned not null,
-    addedOn datetime not null,
+    addedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(`view`, viewVersion, `component`, componentVersion)
 );
 
@@ -122,7 +123,7 @@ create table if not exists SubComponent(
     subComponent int unsigned,
     subComponentVersion varchar(16),
 	addedBy smallint unsigned not null,
-    addedOn datetime not null,
+    addedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(`component`, componentVersion, subComponent, subComponentVersion)
 );
 
@@ -148,7 +149,7 @@ create table if not exists ParameterType(
 	typeID int unsigned auto_increment primary key,
     `name` varchar(64) unique not null,
 	modifiedBy smallint unsigned not null,
-    modifiedOn datetime not null
+    modifiedOn datetime not null default current_timestamp on update current_timestamp
 );
 
 create table if not exists Parameter(
@@ -156,7 +157,7 @@ create table if not exists Parameter(
     `name` varchar(64) unique not null,
 	`description` varchar(128) not null,
 	modifiedBy smallint unsigned not null,
-    modifiedOn datetime not null
+    modifiedOn datetime not null default current_timestamp on update current_timestamp
 );
 
 create table if not exists ParameterVersion(
@@ -167,7 +168,7 @@ create table if not exists ParameterVersion(
     `format` int unsigned not null,
 	`type` int unsigned not null,
 	modifiedBy smallint unsigned not null,
-    modifiedOn datetime not null,
+    modifiedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(parameter, version)
 );
 
@@ -182,7 +183,7 @@ create table if not exists ParameterOperator(
     parameterVersion varchar(16),
 	operator varchar(3),
 	addedBy smallint unsigned not null,
-    addedOn datetime not null,
+    addedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(parameter, parameterVersion, operator)
 );
 
@@ -193,7 +194,7 @@ create table if not exists ApplicationParameter(
     parameterVersion varchar(16),
     required boolean not null,
 	modifiedBy smallint unsigned not null,
-    modifiedOn datetime not null,
+    modifiedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(app, appVersion, parameter, parameterVersion)
 );
 
@@ -204,7 +205,7 @@ create table if not exists ViewParameter(
     parameterVersion varchar(16),
     required boolean not null,
 	modifiedBy smallint unsigned not null,
-    modifiedOn datetime not null,
+    modifiedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(`view`, viewVersion, parameter, parameterVersion)
 );
 
@@ -215,6 +216,6 @@ create table if not exists ComponentParameter(
     parameterVersion varchar(16),
     required boolean not null,
 	modifiedBy smallint unsigned not null,
-    modifiedOn datetime not null,
+    modifiedOn datetime not null default current_timestamp on update current_timestamp,
     primary key(`component`, componentVersion, parameter, parameterVersion)
 );

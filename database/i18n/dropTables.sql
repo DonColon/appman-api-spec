@@ -15,9 +15,9 @@ drop table if exists `Language`;
 drop table if exists LocaleLanguage;
 
 drop table if exists DateFormat;
-drop table if exists LocaleDate;
+drop table if exists LocaleDateFormat;
 drop table if exists TimeFormat;
-drop table if exists LocaleTime;
+drop table if exists LocaleTimeFormat;
 drop table if exists Timezone;
 drop table if exists LocaleTimezone;
 

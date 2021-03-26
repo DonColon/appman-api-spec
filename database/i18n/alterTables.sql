@@ -18,13 +18,13 @@ alter table LocaleLanguage
 	add constraint LocaleLanguage_Country foreign key(country) references Country(`code`),
     add constraint LocaleLanguage_Language foreign key(`language`) references `Language`(`code`);
     
-alter table LocaleDate
-	add constraint LocaleDate_Country foreign key(country) references Country(`code`),
-    add constraint LocaleDate_DateFormat foreign key(`format`) references DateFormat(formatID);
+alter table LocaleDateFormat
+	add constraint LocaleDateFormat_Country foreign key(country) references Country(`code`),
+    add constraint LocaleDateFormat_DateFormat foreign key(`format`) references DateFormat(formatID);
     
-alter table LocaleTime
-	add constraint LocaleTime_Country foreign key(country) references Country(`code`),
-    add constraint LocaleTime_TimeFormat foreign key(`format`) references TimeFormat(formatID);
+alter table LocaleTimeFormat
+	add constraint LocaleTimeFormat_Country foreign key(country) references Country(`code`),
+    add constraint LocaleTimeFormat_TimeFormat foreign key(`format`) references TimeFormat(formatID);
     
 alter table LocaleTimezone
 	add constraint LocaleTimezone_Country foreign key(country) references Country(`code`),

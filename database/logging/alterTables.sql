@@ -10,4 +10,5 @@ alter table LogAttribute
 	add constraint LogAttribute_LogRecord foreign key(log) references LogRecord(logID);
     
 alter table LogBody
-	add constraint LogBody_LogRecord foreign key(log) references LogRecord(logID);
+	add constraint LogBody_LogRecord foreign key(log) references LogRecord(logID),
+    add constraint LogBody_Parent foreign key(parent) references LogBody(bodyID);

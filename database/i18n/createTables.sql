@@ -75,7 +75,7 @@ create table if not exists DateFormat(
     `format` varchar(32) unique not null
 );
 
-create table if not exists LocaleDate(
+create table if not exists LocaleDateFormat(
 	country varchar(2),
     `format` smallint unsigned,
     displayStyle varchar(16),
@@ -87,7 +87,7 @@ create table if not exists TimeFormat(
     format varchar(32) unique not null
 );
 
-create table if not exists LocaleTime(
+create table if not exists LocaleTimeFormat(
 	country varchar(2),
     `format` smallint unsigned,
     displayStyle varchar(16),

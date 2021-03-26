@@ -16,9 +16,9 @@ create table if not exists LogRecord(
     levelText varchar(64) not null,
     app int unsigned not null,
     appVersion varchar(16) not null,
-    `system` int unsigned not null,
-    systemVersion varchar(16) not null,
-    `timestamp` datetime not null,
+    `system` int unsigned,
+    systemVersion varchar(16),
+    `timestamp` datetime not null default current_timestamp on update current_timestamp,
     traceID bigint unsigned
 );
 
