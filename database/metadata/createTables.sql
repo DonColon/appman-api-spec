@@ -3,10 +3,12 @@ create table if not exists Developer(
     firstName varchar(64) not null,
     familyName varchar(64) not null,
     userName varchar(64) unique not null,
+    birthday date not null,
     email varchar(256) unique not null,
     `password` char(64) not null,
     phoneNumber varchar(16),
-    mobileNumber varchar(16) not null
+    mobileNumber varchar(16) not null,
+    createdOn datetime default current_timestamp
 );
 
 create table if not exists Collaborator(
