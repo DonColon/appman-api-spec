@@ -1,0 +1,4321 @@
+openapi: 3.0.0
+info:
+  title: Appman Metadata API
+  version: 1.0.0
+  description: The RESTful API for the application manager appman
+  contact:
+    name: Dardan Rrafshi
+    url: 'https://github.com/DonColon/appman-api-spec/issues'
+    email: dardan.rrafshi@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'https://github.com/DonColon/appman-api-spec/blob/main/LICENSE'
+servers:
+  - url: 'https://api.appman.com'
+paths:
+  /developers:
+    get:
+      summary: Get all developers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 6
+                maxProperties: 6
+                additionalProperties: false
+                properties:
+                  totalItems:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    readOnly: true
+                  totalPages:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  page:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  size:
+                    type: integer
+                    format: int32
+                    minimum: 12
+                    maximum: 60
+                    readOnly: true
+                  links:
+                    type: object
+                    minProperties: 2
+                    maxProperties: 4
+                    additionalProperties: false
+                    description: An object with useful links for navigation
+                    properties:
+                      firstUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      previousUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      nextUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      lastUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                    readOnly: true
+                  items:
+                    type: array
+                    uniqueItems: true
+                    items:
+                      $ref: '#/components/schemas/DeveloperReference'
+                    readOnly: true
+                required:
+                  - totalItems
+                  - totalPages
+                  - page
+                  - size
+                  - links
+                  - items
+                readOnly: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: get-developers
+      description: Get a list of all developers
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+      tags:
+        - developer
+    post:
+      summary: Create a developer
+      operationId: post-developers
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Developer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      description: Creates a single developer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Developer'
+        description: ''
+      tags:
+        - developer
+  /systems:
+    get:
+      summary: Get all systems
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 6
+                maxProperties: 6
+                additionalProperties: false
+                properties:
+                  totalItems:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    readOnly: true
+                  totalPages:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  page:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  size:
+                    type: integer
+                    format: int32
+                    minimum: 12
+                    maximum: 60
+                    readOnly: true
+                  links:
+                    type: object
+                    minProperties: 2
+                    maxProperties: 4
+                    additionalProperties: false
+                    description: An object with useful links for navigation
+                    properties:
+                      firstUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      previousUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      nextUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      lastUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                    readOnly: true
+                  items:
+                    type: array
+                    uniqueItems: true
+                    items:
+                      $ref: '#/components/schemas/System'
+                    readOnly: true
+                required:
+                  - totalItems
+                  - totalPages
+                  - page
+                  - size
+                  - links
+                  - items
+                readOnly: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: get-systems
+      description: Get a list of all systems
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+      tags:
+        - system
+    post:
+      summary: Create a system
+      operationId: post-systems
+      description: Creates a single system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 2
+              maxProperties: 3
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  writeOnly: true
+                description:
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                  writeOnly: true
+                docUrl:
+                  type: string
+                  format: uri
+                  minLength: 1
+                  maxLength: 256
+                  writeOnly: true
+              required:
+                - name
+                - description
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      tags:
+        - system
+  /applications:
+    get:
+      summary: Get all applications
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 6
+                maxProperties: 6
+                additionalProperties: false
+                properties:
+                  totalItems:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    readOnly: true
+                  totalPages:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  page:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  size:
+                    type: integer
+                    format: int32
+                    minimum: 12
+                    maximum: 60
+                    readOnly: true
+                  links:
+                    type: object
+                    minProperties: 2
+                    maxProperties: 4
+                    additionalProperties: false
+                    description: An object with useful links for navigation
+                    properties:
+                      firstUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      previousUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      nextUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      lastUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                    readOnly: true
+                  items:
+                    type: array
+                    uniqueItems: true
+                    items:
+                      $ref: '#/components/schemas/Application'
+                    readOnly: true
+                required:
+                  - totalItems
+                  - totalPages
+                  - page
+                  - size
+                  - links
+                  - items
+                readOnly: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: get-applications
+      description: Get a list of all applications
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+      tags:
+        - application
+    post:
+      summary: Create an application
+      operationId: post-applications
+      description: Creates a single application
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 4
+              maxProperties: 8
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  writeOnly: true
+                description:
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                  writeOnly: true
+                homepageUrl:
+                  type: string
+                  format: uri
+                  minLength: 1
+                  maxLength: 256
+                  writeOnly: true
+                repositoryUrl:
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+                  format: uri
+                  writeOnly: true
+                gitUrl:
+                  type: string
+                  format: uri
+                  minLength: 1
+                  maxLength: 256
+                  writeOnly: true
+                issueUrl:
+                  type: string
+                  format: uri
+                  minLength: 1
+                  maxLength: 256
+                  writeOnly: true
+                license:
+                  type: string
+                  minLength: 1
+                  maxLength: 16
+                  pattern: '^([a-z][a-z0-9]*)(-[a-z0-9]+)*$'
+                  writeOnly: true
+              required:
+                - name
+                - description
+                - license
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      tags:
+        - application
+  /views:
+    get:
+      summary: Get all views
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 6
+                maxProperties: 6
+                additionalProperties: false
+                properties:
+                  totalItems:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    readOnly: true
+                  totalPages:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  page:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  size:
+                    type: integer
+                    format: int32
+                    minimum: 12
+                    maximum: 60
+                    readOnly: true
+                  links:
+                    type: object
+                    minProperties: 2
+                    maxProperties: 4
+                    additionalProperties: false
+                    description: An object with useful links for navigation
+                    properties:
+                      firstUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      previousUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      nextUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      lastUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                    readOnly: true
+                  items:
+                    type: array
+                    uniqueItems: true
+                    items:
+                      $ref: '#/components/schemas/View'
+                    readOnly: true
+                required:
+                  - totalItems
+                  - totalPages
+                  - page
+                  - size
+                  - links
+                  - items
+                readOnly: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: get-views
+      description: Get a list of all views
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+      tags:
+        - view
+    post:
+      summary: Create a view
+      operationId: post-views
+      description: Creates a single view
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 3
+              maxProperties: 3
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  writeOnly: true
+                description:
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                  writeOnly: true
+                route:
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                  writeOnly: true
+              required:
+                - name
+                - description
+                - route
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/View'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      tags:
+        - view
+  /components:
+    get:
+      summary: Get all components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 6
+                maxProperties: 6
+                additionalProperties: false
+                properties:
+                  totalItems:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    readOnly: true
+                  totalPages:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  page:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  size:
+                    type: integer
+                    format: int32
+                    minimum: 12
+                    maximum: 60
+                    readOnly: true
+                  links:
+                    type: object
+                    minProperties: 2
+                    maxProperties: 4
+                    additionalProperties: false
+                    description: An object with useful links for navigation
+                    properties:
+                      firstUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      previousUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      nextUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      lastUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                    readOnly: true
+                  items:
+                    type: array
+                    uniqueItems: true
+                    items:
+                      $ref: '#/components/schemas/Component'
+                    readOnly: true
+                required:
+                  - totalItems
+                  - totalPages
+                  - page
+                  - size
+                  - links
+                  - items
+                readOnly: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: get-components
+      description: Get a list of all components
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+      tags:
+        - component
+    post:
+      summary: Create a component
+      operationId: post-components
+      description: Creates a single component
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 2
+              maxProperties: 2
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  writeOnly: true
+                description:
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                  writeOnly: true
+              required:
+                - name
+                - description
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Component'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      tags:
+        - component
+  /parameters:
+    get:
+      summary: Get all parameters
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 6
+                maxProperties: 6
+                additionalProperties: false
+                properties:
+                  totalItems:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    readOnly: true
+                  totalPages:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  page:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  size:
+                    type: integer
+                    format: int32
+                    minimum: 12
+                    maximum: 60
+                    readOnly: true
+                  links:
+                    type: object
+                    minProperties: 2
+                    maxProperties: 4
+                    additionalProperties: false
+                    description: An object with useful links for navigation
+                    properties:
+                      firstUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      previousUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      nextUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      lastUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                    readOnly: true
+                  items:
+                    type: array
+                    uniqueItems: true
+                    items:
+                      $ref: '#/components/schemas/Parameter'
+                    readOnly: true
+                required:
+                  - totalItems
+                  - totalPages
+                  - page
+                  - size
+                  - links
+                  - items
+                readOnly: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: get-parameters
+      description: Get a list of all parameters
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+      tags:
+        - parameter
+    post:
+      summary: Create a parameter
+      operationId: post-parameters
+      description: Creates a single parameter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 2
+              maxProperties: 2
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  writeOnly: true
+                description:
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                  writeOnly: true
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Parameter'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      tags:
+        - parameter
+  /parameter-types:
+    get:
+      summary: Get all parameter types
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 6
+                maxProperties: 6
+                additionalProperties: false
+                properties:
+                  totalItems:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    readOnly: true
+                  totalPages:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  page:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  size:
+                    type: integer
+                    format: int32
+                    minimum: 12
+                    maximum: 60
+                    readOnly: true
+                  links:
+                    type: object
+                    minProperties: 2
+                    maxProperties: 4
+                    additionalProperties: false
+                    description: An object with useful links for navigation
+                    properties:
+                      firstUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      previousUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      nextUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      lastUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                    readOnly: true
+                  items:
+                    type: array
+                    uniqueItems: true
+                    items:
+                      $ref: '#/components/schemas/ParameterType'
+                    readOnly: true
+                required:
+                  - totalItems
+                  - totalPages
+                  - page
+                  - size
+                  - links
+                  - items
+                readOnly: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: get-parameter-types
+      description: Get a list of all parameter types
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+      tags:
+        - parameter
+  /data-types:
+    get:
+      summary: Get all data types
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 6
+                maxProperties: 6
+                additionalProperties: false
+                properties:
+                  totalItems:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    readOnly: true
+                  totalPages:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  page:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  size:
+                    type: integer
+                    format: int32
+                    minimum: 12
+                    maximum: 60
+                    readOnly: true
+                  links:
+                    type: object
+                    minProperties: 2
+                    maxProperties: 4
+                    additionalProperties: false
+                    description: An object with useful links for navigation
+                    properties:
+                      firstUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      previousUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      nextUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      lastUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                    readOnly: true
+                  items:
+                    type: array
+                    uniqueItems: true
+                    items:
+                      $ref: '#/components/schemas/DataType'
+                    readOnly: true
+                required:
+                  - totalItems
+                  - totalPages
+                  - page
+                  - size
+                  - links
+                  - items
+                readOnly: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: get-data-types
+      description: Get a list of all data types
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+      tags:
+        - parameter
+  /operators:
+    get:
+      summary: Get all operators
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 6
+                maxProperties: 6
+                additionalProperties: false
+                properties:
+                  totalItems:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    readOnly: true
+                  totalPages:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  page:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  size:
+                    type: integer
+                    format: int32
+                    minimum: 12
+                    maximum: 60
+                    readOnly: true
+                  links:
+                    type: object
+                    minProperties: 2
+                    maxProperties: 4
+                    additionalProperties: false
+                    description: An object with useful links for navigation
+                    properties:
+                      firstUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      previousUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      nextUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      lastUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                    readOnly: true
+                  items:
+                    type: array
+                    uniqueItems: true
+                    items:
+                      $ref: '#/components/schemas/Operator'
+                    readOnly: true
+                required:
+                  - totalItems
+                  - totalPages
+                  - page
+                  - size
+                  - links
+                  - items
+                readOnly: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: get-operators
+      description: Get a list of all operators
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+      tags:
+        - parameter
+  /licenses:
+    get:
+      summary: Get all licenses
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 6
+                maxProperties: 6
+                additionalProperties: false
+                properties:
+                  totalItems:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    readOnly: true
+                  totalPages:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  page:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  size:
+                    type: integer
+                    format: int32
+                    minimum: 12
+                    maximum: 60
+                    readOnly: true
+                  links:
+                    type: object
+                    minProperties: 2
+                    maxProperties: 4
+                    additionalProperties: false
+                    description: An object with useful links for navigation
+                    properties:
+                      firstUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      previousUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      nextUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      lastUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                    readOnly: true
+                  items:
+                    type: array
+                    uniqueItems: true
+                    items:
+                      $ref: '#/components/schemas/LicenseReference'
+                    readOnly: true
+                required:
+                  - totalItems
+                  - totalPages
+                  - page
+                  - size
+                  - links
+                  - items
+                readOnly: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: get-licenses
+      description: Get a list of all licenses
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+      tags:
+        - license
+  '/applications/{id}':
+    parameters:
+      - $ref: '#/components/parameters/id'
+    get:
+      summary: Get an application
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      operationId: get-applications-id
+      description: Get a single application by id
+      tags:
+        - application
+    put:
+      summary: Update an application
+      operationId: put-applications-id
+      description: Updates a single application
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 4
+              maxProperties: 8
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  writeOnly: true
+                description:
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                  writeOnly: true
+                homepageUrl:
+                  type: string
+                  format: uri
+                  minLength: 1
+                  maxLength: 256
+                  writeOnly: true
+                repositoryUrl:
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+                  format: uri
+                  writeOnly: true
+                gitUrl:
+                  type: string
+                  format: uri
+                  minLength: 1
+                  maxLength: 256
+                  writeOnly: true
+                issueUrl:
+                  type: string
+                  format: uri
+                  minLength: 1
+                  maxLength: 256
+                  writeOnly: true
+                license:
+                  type: string
+                  minLength: 1
+                  maxLength: 16
+                  pattern: '^([a-z][a-z0-9]*)(-[a-z0-9]+)*$'
+                  writeOnly: true
+              required:
+                - name
+                - description
+                - license
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - application
+    delete:
+      summary: Delete an application
+      operationId: delete-applications-id
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      description: Deletes a single application
+      tags:
+        - application
+  '/components/{id}':
+    parameters:
+      - $ref: '#/components/parameters/id'
+    get:
+      summary: Get a component
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Component'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      operationId: get-components-id
+      description: Get a single component by id
+      tags:
+        - component
+    put:
+      summary: Update a component
+      operationId: put-components-id
+      description: Updates a single component
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 2
+              maxProperties: 2
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  writeOnly: true
+                description:
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                  writeOnly: true
+              required:
+                - name
+                - description
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Component'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - component
+    delete:
+      summary: Delete a component
+      operationId: delete-components-id
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      description: Deletes a single component
+      tags:
+        - component
+  '/developers/{id}':
+    parameters:
+      - $ref: '#/components/parameters/id'
+    get:
+      summary: Get a developer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Developer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      operationId: get-developers-id
+      description: Get a single developer by id
+      tags:
+        - developer
+    put:
+      summary: Update a developer
+      operationId: put-developers-id
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Developer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      description: Updates a single developer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Developer'
+      tags:
+        - developer
+    delete:
+      summary: Delete a developer
+      operationId: delete-developers-id
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      description: Deletes a single developer
+      tags:
+        - developer
+  '/licenses/{label}':
+    parameters:
+      - $ref: '#/components/parameters/label'
+    get:
+      summary: Get a license
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/License'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      operationId: get-licenses-label
+      description: Get a single license by label
+      tags:
+        - license
+  '/parameters/{id}':
+    parameters:
+      - $ref: '#/components/parameters/id'
+    get:
+      summary: Get a parameter
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Parameter'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      operationId: get-parameters-id
+      description: Get a single parameter by id
+      tags:
+        - parameter
+    put:
+      summary: Update a parameter
+      operationId: put-parameters-id
+      description: Updates a single parameter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 2
+              maxProperties: 2
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  writeOnly: true
+                description:
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                  writeOnly: true
+              required:
+                - name
+                - description
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Parameter'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - parameter
+    delete:
+      summary: Delete a parameter
+      operationId: delete-parameters-id
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      description: Deletes a single parameter
+      tags:
+        - parameter
+  '/systems/{id}':
+    parameters:
+      - $ref: '#/components/parameters/id'
+    get:
+      summary: Get a system
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      operationId: get-systems-id
+      description: Get a single system by id
+      tags:
+        - system
+    put:
+      summary: Update a system
+      operationId: put-systems-id
+      description: Updates a single system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 2
+              maxProperties: 3
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  writeOnly: true
+                description:
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                  writeOnly: true
+                docUrl:
+                  type: string
+                  format: uri
+                  minLength: 1
+                  maxLength: 256
+                  writeOnly: true
+              required:
+                - name
+                - description
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - system
+    delete:
+      summary: Delete a system
+      operationId: delete-systems-id
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      description: Deletes a single system
+      tags:
+        - system
+  '/views/{id}':
+    parameters:
+      - $ref: '#/components/parameters/id'
+    get:
+      summary: Get a view
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/View'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      operationId: get-views-id
+      description: Get a single view by id
+      tags:
+        - view
+    put:
+      summary: Update a view
+      operationId: put-views-id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 3
+              maxProperties: 3
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  writeOnly: true
+                description:
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                  writeOnly: true
+                route:
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                  writeOnly: true
+              required:
+                - name
+                - description
+                - route
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/View'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      description: Updates a single view
+      tags:
+        - view
+    delete:
+      summary: Delete a view
+      operationId: delete-views-id
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      description: Deletes a single view
+      tags:
+        - view
+  '/applications/{id}/versions':
+    parameters:
+      - $ref: '#/components/parameters/id'
+    get:
+      summary: Get all application versions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 6
+                maxProperties: 6
+                additionalProperties: false
+                properties:
+                  totalItems:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    readOnly: true
+                  totalPages:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  page:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  size:
+                    type: integer
+                    format: int32
+                    minimum: 12
+                    maximum: 60
+                    readOnly: true
+                  links:
+                    type: object
+                    minProperties: 2
+                    maxProperties: 4
+                    additionalProperties: false
+                    description: An object with useful links for navigation
+                    properties:
+                      firstUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      previousUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      nextUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      lastUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                    readOnly: true
+                  items:
+                    type: array
+                    uniqueItems: true
+                    items:
+                      $ref: '#/components/schemas/ApplicationVersion'
+                    readOnly: true
+                required:
+                  - totalItems
+                  - totalPages
+                  - page
+                  - size
+                  - links
+                  - items
+                readOnly: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: get-applications-id-versions
+      description: Get a list of all application versions
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+      tags:
+        - application
+    post:
+      summary: Create an application version
+      operationId: post-applications-id-versions
+      description: Creates a single application version
+      tags:
+        - application
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 2
+              maxProperties: 2
+              additionalProperties: false
+              properties:
+                version:
+                  type: string
+                  pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                  minLength: 5
+                  maxLength: 16
+                  writeOnly: true
+              required:
+                - version
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  '/components/{id}/versions':
+    parameters:
+      - $ref: '#/components/parameters/id'
+    get:
+      summary: Get all component versions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 6
+                maxProperties: 6
+                additionalProperties: false
+                properties:
+                  totalItems:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    readOnly: true
+                  totalPages:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  page:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  size:
+                    type: integer
+                    format: int32
+                    minimum: 12
+                    maximum: 60
+                    readOnly: true
+                  links:
+                    type: object
+                    minProperties: 2
+                    maxProperties: 4
+                    additionalProperties: false
+                    description: An object with useful links for navigation
+                    properties:
+                      firstUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      previousUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      nextUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      lastUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                    readOnly: true
+                  items:
+                    type: array
+                    uniqueItems: true
+                    items:
+                      $ref: '#/components/schemas/ComponentVersion'
+                    readOnly: true
+                required:
+                  - totalItems
+                  - totalPages
+                  - page
+                  - size
+                  - links
+                  - items
+                readOnly: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: get-components-id-versions
+      description: Get a list of all component versions
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+      tags:
+        - component
+    post:
+      summary: Create a component version
+      operationId: post-components-id-versions
+      tags:
+        - component
+      description: Creates a single component version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 2
+              maxProperties: 2
+              additionalProperties: false
+              properties:
+                version:
+                  type: string
+                  pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                  minLength: 5
+                  maxLength: 16
+                  writeOnly: true
+              required:
+                - version
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComponentVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  '/parameters/{id}/versions':
+    parameters:
+      - $ref: '#/components/parameters/id'
+    get:
+      summary: Get all parameter versions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 6
+                maxProperties: 6
+                additionalProperties: false
+                properties:
+                  totalItems:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    readOnly: true
+                  totalPages:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  page:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  size:
+                    type: integer
+                    format: int32
+                    minimum: 12
+                    maximum: 60
+                    readOnly: true
+                  links:
+                    type: object
+                    minProperties: 2
+                    maxProperties: 4
+                    additionalProperties: false
+                    description: An object with useful links for navigation
+                    properties:
+                      firstUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      previousUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      nextUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      lastUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                    readOnly: true
+                  items:
+                    type: array
+                    uniqueItems: true
+                    items:
+                      $ref: '#/components/schemas/ParameterVersion'
+                    readOnly: true
+                required:
+                  - totalItems
+                  - totalPages
+                  - page
+                  - size
+                  - links
+                  - items
+                readOnly: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: get-parameters-id-versions
+      description: Get a list of all parameter versions
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+      tags:
+        - parameter
+    post:
+      summary: Create a parameter version
+      operationId: post-parameters-id-versions
+      description: Creates a single parameter version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              minProperties: 7
+              maxProperties: 7
+              properties:
+                version:
+                  type: string
+                  pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                  minLength: 5
+                  maxLength: 16
+                  writeOnly: true
+                isArray:
+                  type: boolean
+                  writeOnly: true
+                hasValueHelp:
+                  type: boolean
+                  writeOnly: true
+                required:
+                  type: boolean
+                  writeOnly: true
+                dataFormat:
+                  type: integer
+                  format: int32
+                  minimum: 0
+                  maximum: 4294967295
+                  writeOnly: true
+                parameterType:
+                  type: integer
+                  format: int32
+                  minimum: 0
+                  maximum: 4294967295
+                  writeOnly: true
+                allowedOperators:
+                  type: array
+                  uniqueItems: true
+                  items:
+                    type: string
+                    minLength: 1
+                    maxLength: 3
+                    writeOnly: true
+                  writeOnly: true
+              required:
+                - version
+                - isArray
+                - hasValueHelp
+                - required
+                - dataFormat
+                - parameterType
+                - allowedOperators
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      tags:
+        - parameter
+  '/systems/{id}/versions':
+    parameters:
+      - $ref: '#/components/parameters/id'
+    get:
+      summary: Get all system versions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 6
+                maxProperties: 6
+                additionalProperties: false
+                properties:
+                  totalItems:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    readOnly: true
+                  totalPages:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  page:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  size:
+                    type: integer
+                    format: int32
+                    minimum: 12
+                    maximum: 60
+                    readOnly: true
+                  links:
+                    type: object
+                    minProperties: 2
+                    maxProperties: 4
+                    additionalProperties: false
+                    description: An object with useful links for navigation
+                    properties:
+                      firstUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      previousUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      nextUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      lastUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                    readOnly: true
+                  items:
+                    type: array
+                    uniqueItems: true
+                    items:
+                      $ref: '#/components/schemas/SystemVersion'
+                    readOnly: true
+                required:
+                  - totalItems
+                  - totalPages
+                  - page
+                  - size
+                  - links
+                  - items
+                readOnly: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: get-systems-id-versions
+      description: Get a list of all system versions
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+      tags:
+        - system
+    post:
+      summary: Create a system version
+      operationId: post-systems-id-versions
+      description: Creates a single system version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 2
+              maxProperties: 2
+              additionalProperties: false
+              properties:
+                version:
+                  type: string
+                  pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                  minLength: 5
+                  maxLength: 16
+                  writeOnly: true
+              required:
+                - version
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      tags:
+        - system
+  '/views/{id}/versions':
+    parameters:
+      - $ref: '#/components/parameters/id'
+    get:
+      summary: Get all view versions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 6
+                maxProperties: 6
+                additionalProperties: false
+                properties:
+                  totalItems:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    readOnly: true
+                  totalPages:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  page:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    readOnly: true
+                  size:
+                    type: integer
+                    format: int32
+                    minimum: 12
+                    maximum: 60
+                    readOnly: true
+                  links:
+                    type: object
+                    minProperties: 2
+                    maxProperties: 4
+                    additionalProperties: false
+                    description: An object with useful links for navigation
+                    properties:
+                      firstUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      previousUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      nextUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                      lastUrl:
+                        type: string
+                        format: uri
+                        readOnly: true
+                    readOnly: true
+                  items:
+                    type: array
+                    uniqueItems: true
+                    items:
+                      $ref: '#/components/schemas/ViewVersion'
+                    readOnly: true
+                required:
+                  - totalItems
+                  - totalPages
+                  - page
+                  - size
+                  - links
+                  - items
+                readOnly: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: get-views-id-versions
+      description: Get a list of all view versions
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+      tags:
+        - view
+    post:
+      summary: Create a view version
+      operationId: post-views-id-versions
+      description: Creates a single view version
+      tags:
+        - view
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 2
+              maxProperties: 2
+              additionalProperties: false
+              properties:
+                version:
+                  type: string
+                  pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                  minLength: 5
+                  maxLength: 16
+                  writeOnly: true
+              required:
+                - version
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  '/applications/{id}/versions/{version}':
+    parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/version'
+    get:
+      summary: Get an application version
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      operationId: get-applications-id-versions-version
+      description: Get a single application version by id and version number
+      tags:
+        - application
+    delete:
+      summary: Delete an application version
+      operationId: delete-applications-id-versions-version
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      description: Deletes a single application version
+      tags:
+        - application
+  '/components/{id}/versions/{version}':
+    parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/version'
+    get:
+      summary: Get a component version
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComponentVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      operationId: get-components-id-versions-version
+      description: Get a single component version by id and version number
+      tags:
+        - component
+    delete:
+      summary: Delete a component version
+      operationId: delete-components-id-versions-version
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      description: Deletes a single component version
+      tags:
+        - component
+  '/parameters/{id}/versions/{version}':
+    parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/version'
+    get:
+      summary: Get a parameter version
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      operationId: get-parameters-id-versions-version
+      description: Get a single parameter version by id and version number
+      tags:
+        - parameter
+    delete:
+      summary: Delete a parameter version
+      operationId: delete-parameters-id-versions-version
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      description: Deletes a single parameter version
+      tags:
+        - parameter
+    put:
+      summary: Update a parameter version
+      operationId: put-parameters-id-versions-version
+      description: Updates a single parameter version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              maxProperties: 6
+              additionalProperties: false
+              minProperties: 6
+              properties:
+                isArray:
+                  type: boolean
+                  writeOnly: true
+                hasValueHelp:
+                  type: boolean
+                  writeOnly: true
+                required:
+                  type: boolean
+                  writeOnly: true
+                dataFormat:
+                  type: integer
+                  format: int32
+                  minimum: 0
+                  maximum: 4294967295
+                  writeOnly: true
+                parameterType:
+                  type: integer
+                  format: int32
+                  minimum: 0
+                  maximum: 4294967295
+                  writeOnly: true
+                allowedOperators:
+                  type: array
+                  uniqueItems: true
+                  items:
+                    type: string
+                    minLength: 1
+                    maxLength: 3
+                    writeOnly: true
+                  writeOnly: true
+              required:
+                - isArray
+                - hasValueHelp
+                - required
+                - dataFormat
+                - parameterType
+                - allowedOperators
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - parameter
+  '/systems/{id}/versions/{version}':
+    parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/version'
+    get:
+      summary: Get a system version
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      operationId: get-systems-id-versions-version
+      description: Get a single system version by id and version number
+      tags:
+        - system
+    delete:
+      summary: Delete a system version
+      operationId: delete-systems-id-versions-version
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      description: Deletes a single system version
+      tags:
+        - system
+  '/views/{id}/versions/{version}':
+    parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/version'
+    get:
+      summary: Get a view version
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      operationId: get-views-id-versions-version
+      description: Get a single view version by id and version number
+      tags:
+        - view
+    delete:
+      summary: Delete a view version
+      operationId: delete-views-id-versions-version
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      description: Deletes a single view version
+      tags:
+        - view
+  '/applications/{id}/collaborators':
+    parameters:
+      - $ref: '#/components/parameters/id'
+    post:
+      summary: Add multiple collaborators
+      operationId: post-applications-id-collaborators
+      description: Adds multiple collaborator to an application
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 1
+              maxProperties: 1
+              additionalProperties: false
+              properties:
+                ids:
+                  type: array
+                  uniqueItems: true
+                  items:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 65535
+                    writeOnly: true
+                  writeOnly: true
+              required:
+                - ids
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - application
+    delete:
+      summary: Remove multiple collaborators
+      operationId: delete-applications-id-collaborators
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      description: Removes multiple collaborator from an application
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 1
+              maxProperties: 1
+              additionalProperties: false
+              properties:
+                ids:
+                  type: array
+                  uniqueItems: true
+                  items:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 65535
+                    writeOnly: true
+                  writeOnly: true
+              required:
+                - ids
+              writeOnly: true
+      tags:
+        - application
+  '/applications/{id}/versions/{version}/backend':
+    parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/version'
+    post:
+      summary: Add multiple system versions
+      operationId: post-applications-id-versions-version-backend-systems
+      description: Adds multiple system versions to an application version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              uniqueItems: true
+              items:
+                type: object
+                minProperties: 2
+                maxProperties: 2
+                additionalProperties: false
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 4294967295
+                    writeOnly: true
+                  version:
+                    type: string
+                    pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                    minLength: 5
+                    maxLength: 16
+                    writeOnly: true
+                required:
+                  - id
+                  - version
+                writeOnly: true
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - application
+    delete:
+      summary: Remove multiple system versions
+      operationId: delete-applications-id-versions-version-backend
+      description: Removes multiple system versions from an application version
+      tags:
+        - application
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              uniqueItems: true
+              items:
+                type: object
+                minProperties: 2
+                maxProperties: 2
+                additionalProperties: false
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 4294967295
+                    writeOnly: true
+                  version:
+                    type: string
+                    pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                    minLength: 5
+                    maxLength: 16
+                    writeOnly: true
+                required:
+                  - id
+                  - version
+                writeOnly: true
+              writeOnly: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/applications/{id}/versions/{version}/views':
+    parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/version'
+    post:
+      summary: Add multiple view versions
+      operationId: post-applications-id-versions-version-views
+      tags:
+        - application
+      description: Adds multiple view versions to an application version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              uniqueItems: true
+              items:
+                type: object
+                minProperties: 2
+                maxProperties: 2
+                additionalProperties: false
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 4294967295
+                    writeOnly: true
+                  version:
+                    type: string
+                    pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                    minLength: 5
+                    maxLength: 16
+                    writeOnly: true
+                required:
+                  - id
+                  - version
+                writeOnly: true
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Remove multiple view versions
+      operationId: delete-applications-id-versions-version-views
+      description: Removes multiple view versions from an application version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              uniqueItems: true
+              items:
+                type: object
+                minProperties: 2
+                maxProperties: 2
+                additionalProperties: false
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 4294967295
+                    writeOnly: true
+                  version:
+                    type: string
+                    pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                    minLength: 5
+                    maxLength: 16
+                    writeOnly: true
+                required:
+                  - id
+                  - version
+                writeOnly: true
+              writeOnly: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - application
+  '/applications/{id}/versions/{version}/parameters':
+    parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/version'
+    post:
+      summary: Add multiple parameter versions
+      operationId: post-applications-id-versions-version-parameters
+      tags:
+        - application
+      description: Adds multiple parameter versions to an application version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              uniqueItems: true
+              items:
+                type: object
+                minProperties: 2
+                maxProperties: 2
+                additionalProperties: false
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 4294967295
+                    writeOnly: true
+                  version:
+                    type: string
+                    pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                    minLength: 5
+                    maxLength: 16
+                    writeOnly: true
+                  required:
+                    type: boolean
+                    writeOnly: true
+                required:
+                  - id
+                  - version
+                  - required
+                writeOnly: true
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Remove multiple parameter versions
+      operationId: delete-applications-id-versions-version-parameters
+      description: Removes multiple view versions from an application version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              uniqueItems: true
+              items:
+                type: object
+                minProperties: 2
+                maxProperties: 2
+                additionalProperties: false
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 4294967295
+                    writeOnly: true
+                  version:
+                    type: string
+                    pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                    minLength: 5
+                    maxLength: 16
+                    writeOnly: true
+                required:
+                  - id
+                  - version
+                writeOnly: true
+              writeOnly: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - application
+  '/views/{id}/versions/{version}/components':
+    parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/version'
+    post:
+      summary: Add multiple component versions
+      operationId: post-views-id-versions-version-components
+      tags:
+        - view
+      description: Adds multiple component versions to a view version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              uniqueItems: true
+              items:
+                type: object
+                minProperties: 2
+                maxProperties: 2
+                additionalProperties: false
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 4294967295
+                    writeOnly: true
+                  version:
+                    type: string
+                    pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                    minLength: 5
+                    maxLength: 16
+                    writeOnly: true
+                required:
+                  - id
+                  - version
+                writeOnly: true
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Remove multiple component versions
+      operationId: delete-views-id-versions-version-components
+      description: Removes multiple component versions from a view version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              uniqueItems: true
+              items:
+                type: object
+                minProperties: 2
+                maxProperties: 2
+                additionalProperties: false
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 4294967295
+                    writeOnly: true
+                  version:
+                    type: string
+                    pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                    minLength: 5
+                    maxLength: 16
+                    writeOnly: true
+                required:
+                  - id
+                  - version
+                writeOnly: true
+              writeOnly: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - view
+  '/views/{id}/versions/{version}/parameters':
+    parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/version'
+    post:
+      summary: Add multiple parameter versions
+      operationId: post-views-id-versions-version-parameters
+      tags:
+        - view
+      description: Adds multiple parameter versions to a view version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              uniqueItems: true
+              items:
+                type: object
+                minProperties: 2
+                maxProperties: 2
+                additionalProperties: false
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 4294967295
+                    writeOnly: true
+                  version:
+                    type: string
+                    pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                    minLength: 5
+                    maxLength: 16
+                    writeOnly: true
+                  required:
+                    type: boolean
+                    writeOnly: true
+                required:
+                  - id
+                  - version
+                  - required
+                writeOnly: true
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Remove multiple parameter versions
+      operationId: delete-views-id-versions-version-parameters
+      description: Removes multiple parameter versions from a view version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              uniqueItems: true
+              items:
+                type: object
+                minProperties: 2
+                maxProperties: 2
+                additionalProperties: false
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 4294967295
+                    writeOnly: true
+                  version:
+                    type: string
+                    pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                    minLength: 5
+                    maxLength: 16
+                    writeOnly: true
+                required:
+                  - id
+                  - version
+                writeOnly: true
+              writeOnly: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - view
+  '/components/{id}/versions/{version}/sub-components':
+    parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/version'
+    post:
+      summary: Add multiple component versions
+      operationId: post-components-id-versions-version-sub-components
+      tags:
+        - component
+      description: Adds multiple sub component versions to a component version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              uniqueItems: true
+              items:
+                type: object
+                minProperties: 2
+                maxProperties: 2
+                additionalProperties: false
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 4294967295
+                    writeOnly: true
+                  version:
+                    type: string
+                    pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                    minLength: 5
+                    maxLength: 16
+                    writeOnly: true
+                required:
+                  - id
+                  - version
+                writeOnly: true
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComponentVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Remove multiple component versions
+      operationId: delete-components-id-versions-version-sub-components
+      description: Removes multiple sub component versions from a component version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              uniqueItems: true
+              items:
+                type: object
+                minProperties: 2
+                maxProperties: 2
+                additionalProperties: false
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 4294967295
+                    writeOnly: true
+                  version:
+                    type: string
+                    pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                    minLength: 5
+                    maxLength: 16
+                    writeOnly: true
+                required:
+                  - id
+                  - version
+                writeOnly: true
+              writeOnly: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - component
+  '/components/{id}/versions/{version}/parameters':
+    parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/version'
+    post:
+      summary: Add multiple parameter versions
+      operationId: post-components-id-versions-version-parameters
+      tags:
+        - component
+      description: Adds multiple parameter versions to a component version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              uniqueItems: true
+              items:
+                type: object
+                minProperties: 2
+                maxProperties: 2
+                additionalProperties: false
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 4294967295
+                    writeOnly: true
+                  version:
+                    type: string
+                    pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                    minLength: 5
+                    maxLength: 16
+                    writeOnly: true
+                  required:
+                    type: boolean
+                    writeOnly: true
+                required:
+                  - id
+                  - version
+                  - required
+                writeOnly: true
+              writeOnly: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComponentVersion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Remove multiple parameter versions
+      operationId: delete-components-id-versions-version-parameters
+      description: Removes multiple parameter versions from a component version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              uniqueItems: true
+              items:
+                type: object
+                minProperties: 2
+                maxProperties: 2
+                additionalProperties: false
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    maximum: 4294967295
+                    writeOnly: true
+                  version:
+                    type: string
+                    pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+                    minLength: 5
+                    maxLength: 16
+                    writeOnly: true
+                required:
+                  - id
+                  - version
+                writeOnly: true
+              writeOnly: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+        - component
+components:
+  schemas:
+    Developer:
+      type: object
+      title: Developer
+      additionalProperties: false
+      minProperties: 8
+      maxProperties: 10
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 65535
+          readOnly: true
+        firstName:
+          type: string
+          minLength: 1
+          maxLength: 64
+        familyName:
+          type: string
+          minLength: 1
+          maxLength: 64
+        userName:
+          type: string
+          minLength: 1
+          maxLength: 64
+        birthday:
+          type: string
+          format: date
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+          pattern: '^[$]2[abxy]?[$](?:0[4-9]|[12][0-9]|3[01])[$][.\/0-9a-zA-Z]{53}$'
+          minLength: 59
+          maxLength: 60
+          writeOnly: true
+        phoneNumber:
+          type: string
+          pattern: '^\+[1-9]\d{1,14}$'
+          minLength: 1
+          maxLength: 14
+        mobileNumber:
+          type: string
+          pattern: '^\+[1-9]\d{1,14}$'
+          minLength: 1
+          maxLength: 14
+        createdOn:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - firstName
+        - familyName
+        - userName
+        - birthday
+        - email
+        - password
+        - mobileNumber
+      description: The general information about a developer
+      x-examples:
+        Dardan Rrafshi (read):
+          id: 1
+          firstName: Dardan
+          familyName: Rrafshi
+          userName: DonColon
+          birthday: '1997-01-30'
+          email: dardan.rrafshi@gmail.com
+          phoneNumber: '+497376982196'
+          mobileNumber: '+4915738961424'
+          createdOn: '2021-03-28T14:15:22Z'
+        Dardan Rrafshi (write):
+          firstName: Dardan
+          familyName: Rrafshi
+          userName: DonColon
+          birthday: '1997-01-30'
+          email: dardan.rrafshi@gmail.com
+          password: $2a$10$xW.LCglUeJ0RQZJaGrJdcuiwv8WQ3jHNg2Nf9Mw4WbQgO6QyIbsL6
+          phoneNumber: '+497376982196'
+          mobileNumber: '+4915738961424'
+    License:
+      type: object
+      title: License
+      description: The general information about a license
+      additionalProperties: false
+      minProperties: 9
+      maxProperties: 9
+      x-examples:
+        Apache License 2.0:
+          id: apache-2.0
+          spdxID: Apache-2.0
+          name: Apache License 2.0
+          description: A permissive license whose main conditions req...
+          url: 'http://choosealicense.com/licenses/apache-2.0/'
+          content: Apache Licens...
+          permissions:
+            - id: commercial-use
+              name: Commercial use
+              description: The licensed material and derivatives may be used for commercial purposes.
+          conditions:
+            - id: disclose-source
+              name: Disclose source
+              description: Source code must be made available when the licensed material is distributed.
+          limitations:
+            - id: liability
+              name: Liability
+              description: This license includes a limitation of liability.
+      properties:
+        id:
+          type: string
+          minLength: 1
+          maxLength: 16
+          pattern: '^([a-z][a-z0-9]*)(-[a-z0-9]+)*$'
+          readOnly: true
+        spdxID:
+          type: string
+          minLength: 1
+          maxLength: 16
+          description: A unique identifier from the SPDX (Software Package Data Exchange) License List
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        description:
+          type: string
+          minLength: 1
+          maxLength: 128
+          readOnly: true
+        url:
+          type: string
+          format: uri
+          minLength: 1
+          maxLength: 256
+          readOnly: true
+        content:
+          type: string
+          minLength: 1
+          maxLength: 4294967295
+          readOnly: true
+        permissions:
+          type: array
+          uniqueItems: true
+          description: A list of permissions for this license
+          items:
+            type: object
+            additionalProperties: false
+            minProperties: 3
+            maxProperties: 3
+            properties:
+              id:
+                type: string
+                minLength: 1
+                maxLength: 16
+                pattern: '^([a-z][a-z0-9]*)(-[a-z0-9]+)*$'
+                readOnly: true
+              name:
+                type: string
+                minLength: 1
+                maxLength: 64
+                readOnly: true
+              description:
+                type: string
+                minLength: 1
+                maxLength: 128
+                readOnly: true
+            readOnly: true
+          readOnly: true
+        conditions:
+          type: array
+          uniqueItems: true
+          description: A list of conditions for this license
+          items:
+            type: object
+            additionalProperties: false
+            minProperties: 3
+            maxProperties: 3
+            properties:
+              id:
+                type: string
+                minLength: 1
+                maxLength: 32
+                pattern: '^([a-z][a-z0-9]*)(-[a-z0-9]+)*$'
+                readOnly: true
+              name:
+                type: string
+                minLength: 1
+                maxLength: 64
+                readOnly: true
+              description:
+                type: string
+                minLength: 1
+                maxLength: 128
+                readOnly: true
+            readOnly: true
+          readOnly: true
+        limitations:
+          type: array
+          uniqueItems: true
+          description: A list of limitations for this license
+          items:
+            type: object
+            additionalProperties: false
+            minProperties: 3
+            maxProperties: 3
+            properties:
+              id:
+                type: string
+                minLength: 1
+                maxLength: 16
+                pattern: '^([a-z][a-z0-9]*)(-[a-z0-9]+)*$'
+                readOnly: true
+              name:
+                type: string
+                minLength: 1
+                maxLength: 64
+                readOnly: true
+              description:
+                type: string
+                minLength: 1
+                maxLength: 128
+                readOnly: true
+            readOnly: true
+          readOnly: true
+      readOnly: true
+    ParameterVersion:
+      type: object
+      title: ParameterVersion
+      description: The meta information about a parameter version
+      minProperties: 11
+      maxProperties: 11
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 4294967295
+          readOnly: true
+        version:
+          type: string
+          pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+          minLength: 5
+          maxLength: 16
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        description:
+          type: string
+          minLength: 1
+          maxLength: 128
+          readOnly: true
+        isArray:
+          type: boolean
+          readOnly: true
+        hasValueHelp:
+          type: boolean
+          readOnly: true
+        required:
+          type: boolean
+          readOnly: true
+        dataFormat:
+          $ref: '#/components/schemas/DataFormat'
+        parameterType:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        allowedOperators:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          maxItems: 14
+          items:
+            $ref: '#/components/schemas/Operator'
+          readOnly: true
+        modifiedBy:
+          $ref: '#/components/schemas/DeveloperReference'
+        modifiedOn:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - id
+        - version
+        - name
+        - description
+        - isArray
+        - hasValueHelp
+        - dataFormat
+        - parameterType
+        - allowedOperators
+        - modifiedBy
+        - modifiedOn
+        - required
+    DataFormat:
+      title: DataFormat
+      type: object
+      additionalProperties: false
+      minProperties: 4
+      maxProperties: 6
+      description: The meta information about a data format
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 4294967295
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        format:
+          type: string
+          minLength: 1
+          maxLength: 1024
+          readOnly: true
+        min:
+          type: number
+          format: double
+          minimum: -1.7976931348623157e+308
+          maximum: -2.2250738585072014e-308
+          readOnly: true
+        max:
+          type: number
+          format: double
+          maximum: -2.2250738585072014e-308
+          minimum: -1.7976931348623157e+308
+          readOnly: true
+        type:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+      required:
+        - id
+        - name
+        - format
+        - type
+      readOnly: true
+    Operator:
+      title: Operator
+      type: object
+      minProperties: 3
+      maxProperties: 3
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          minLength: 1
+          maxLength: 3
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        inputNumber:
+          type: integer
+          minimum: 0
+          maximum: 255
+          format: int32
+          readOnly: true
+      required:
+        - id
+        - name
+        - inputNumber
+      description: The meta information about an operator
+    DeveloperReference:
+      title: DeveloperReference
+      type: object
+      additionalProperties: false
+      minProperties: 3
+      maxProperties: 3
+      required:
+        - id
+        - userName
+        - uri
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 65535
+          readOnly: true
+        userName:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        uri:
+          type: string
+          format: uri
+          readOnly: true
+      readOnly: true
+      description: The reference to the developer information. It contains an uri to the full representation of the developer.
+    SystemVersion:
+      type: object
+      title: SystemVersion
+      description: The meta information about a system version
+      minProperties: 6
+      maxProperties: 7
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          format: int32
+          maximum: 4294967295
+          minimum: 0
+          readOnly: true
+        version:
+          type: string
+          pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+          minLength: 5
+          maxLength: 16
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        description:
+          type: string
+          minLength: 1
+          maxLength: 128
+          readOnly: true
+        docUrl:
+          type: string
+          format: uri
+          minLength: 1
+          maxLength: 256
+          readOnly: true
+        addedBy:
+          $ref: '#/components/schemas/DeveloperReference'
+        addedOn:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - id
+        - version
+        - name
+        - description
+        - addedBy
+        - addedOn
+      readOnly: true
+    ComponentVersion:
+      type: object
+      title: ComponentVersion
+      description: The meta information about a component version
+      minProperties: 6
+      maxProperties: 8
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 4294967295
+          readOnly: true
+        version:
+          type: string
+          pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+          minLength: 5
+          maxLength: 16
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        description:
+          type: string
+          minLength: 1
+          maxLength: 128
+          readOnly: true
+        subComponents:
+          type: array
+          description: The sub components that are used by the component
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ComponentVersion'
+          readOnly: true
+        allowedParameters:
+          type: array
+          description: The parameters that are allowed to set in the configuration
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ParameterVersion'
+          readOnly: true
+        addedBy:
+          $ref: '#/components/schemas/DeveloperReference'
+        addedOn:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - id
+        - version
+        - name
+        - description
+        - addedBy
+        - addedOn
+      readOnly: true
+    ViewVersion:
+      type: object
+      title: ViewVersion
+      description: The meta information about a view version
+      minProperties: 6
+      maxProperties: 8
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 4294967295
+          readOnly: true
+        version:
+          type: string
+          pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+          minLength: 5
+          maxLength: 16
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        description:
+          type: string
+          minLength: 1
+          maxLength: 128
+          readOnly: true
+        route:
+          type: string
+          minLength: 1
+          maxLength: 128
+          readOnly: true
+        viewComponents:
+          type: array
+          description: The components that are used by the view
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ComponentVersion'
+          readOnly: true
+        allowedParameters:
+          type: array
+          description: The parameters that are allowed to set in the configuration
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ParameterVersion'
+          readOnly: true
+        addedBy:
+          $ref: '#/components/schemas/DeveloperReference'
+        addedOn:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - id
+        - version
+        - name
+        - description
+        - route
+        - addedBy
+        - addedOn
+      readOnly: true
+    ApplicationVersion:
+      type: object
+      title: ApplicationVersion
+      description: The meta information about a application version
+      additionalProperties: false
+      minProperties: 9
+      maxProperties: 11
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 4294967295
+          readOnly: true
+        version:
+          type: string
+          pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+          minLength: 5
+          maxLength: 16
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        description:
+          type: string
+          minLength: 1
+          maxLength: 128
+          readOnly: true
+        homepageUrl:
+          type: string
+          format: uri
+          minLength: 1
+          maxLength: 256
+          readOnly: true
+        repositoryUrl:
+          type: string
+          minLength: 1
+          maxLength: 256
+          format: uri
+          readOnly: true
+        gitUrl:
+          type: string
+          format: uri
+          minLength: 1
+          maxLength: 256
+          readOnly: true
+        issueUrl:
+          type: string
+          format: uri
+          minLength: 1
+          maxLength: 256
+          readOnly: true
+        license:
+          $ref: '#/components/schemas/LicenseReference'
+        author:
+          $ref: '#/components/schemas/DeveloperReference'
+        collaborators:
+          type: array
+          description: The developers that work on this application
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/DeveloperReference'
+          readOnly: true
+        backendSystems:
+          type: array
+          uniqueItems: true
+          description: The backend systems that are used by the application
+          items:
+            $ref: '#/components/schemas/SystemVersion'
+          readOnly: true
+        applicationViews:
+          type: array
+          uniqueItems: true
+          description: The views that are used by the application
+          items:
+            $ref: '#/components/schemas/ViewVersion'
+          readOnly: true
+        allowedParameters:
+          type: array
+          uniqueItems: true
+          description: The parameters that are allowed to set in the configuration
+          items:
+            $ref: '#/components/schemas/ParameterVersion'
+          readOnly: true
+        addedBy:
+          $ref: '#/components/schemas/DeveloperReference'
+        addedOn:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - id
+        - version
+        - name
+        - description
+        - license
+        - author
+        - addedBy
+        - addedOn
+      readOnly: true
+    Application:
+      type: object
+      title: Application
+      description: The meta information about a application
+      additionalProperties: false
+      maxProperties: 12
+      minProperties: 7
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 4294967295
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        description:
+          type: string
+          minLength: 1
+          maxLength: 128
+          readOnly: true
+        homepageUrl:
+          type: string
+          format: uri
+          minLength: 1
+          maxLength: 256
+          readOnly: true
+        repositoryUrl:
+          type: string
+          minLength: 1
+          maxLength: 256
+          format: uri
+          readOnly: true
+        gitUrl:
+          type: string
+          format: uri
+          minLength: 1
+          maxLength: 256
+          readOnly: true
+        issueUrl:
+          type: string
+          format: uri
+          minLength: 1
+          maxLength: 256
+          readOnly: true
+        license:
+          $ref: '#/components/schemas/LicenseReference'
+        author:
+          $ref: '#/components/schemas/DeveloperReference'
+        collaborators:
+          type: array
+          description: The developers that work on this application
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/DeveloperReference'
+          readOnly: true
+        modifiedBy:
+          $ref: '#/components/schemas/DeveloperReference'
+        modifiedOn:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - id
+        - name
+        - description
+        - license
+        - author
+        - modifiedBy
+        - modifiedOn
+      readOnly: true
+    DataType:
+      type: object
+      title: DataType
+      description: The meta information about a data type
+      additionalProperties: false
+      minProperties: 3
+      maxProperties: 3
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 4294967295
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        formats:
+          type: array
+          uniqueItems: true
+          description: The data formats for this data type
+          items:
+            $ref: '#/components/schemas/DataFormat'
+          readOnly: true
+      required:
+        - id
+        - name
+        - formats
+      readOnly: true
+    Component:
+      type: object
+      title: Component
+      additionalProperties: false
+      minProperties: 5
+      maxProperties: 5
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 4294967295
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        description:
+          type: string
+          minLength: 1
+          maxLength: 128
+          readOnly: true
+        modifiedBy:
+          $ref: '#/components/schemas/DeveloperReference'
+        modifiedOn:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - id
+        - name
+        - description
+        - modifiedBy
+        - modifiedOn
+      readOnly: true
+      description: The meta information about a component
+    View:
+      title: View
+      type: object
+      additionalProperties: false
+      minProperties: 5
+      maxProperties: 5
+      description: The meta information about a view
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 4294967295
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        description:
+          type: string
+          minLength: 1
+          maxLength: 128
+          readOnly: true
+        route:
+          type: string
+          minLength: 1
+          maxLength: 128
+          readOnly: true
+        modifiedBy:
+          $ref: '#/components/schemas/DeveloperReference'
+        modifiedOn:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - id
+        - name
+        - description
+        - modifiedBy
+        - modifiedOn
+      readOnly: true
+    System:
+      title: System
+      type: object
+      additionalProperties: false
+      minProperties: 5
+      maxProperties: 5
+      description: The meta information about a system
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 4294967295
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        description:
+          type: string
+          minLength: 1
+          maxLength: 128
+          readOnly: true
+        docUrl:
+          type: string
+          format: uri
+          minLength: 1
+          maxLength: 256
+          readOnly: true
+        modifiedBy:
+          $ref: '#/components/schemas/DeveloperReference'
+        modifiedOn:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - id
+        - name
+        - description
+        - modifiedBy
+        - modifiedOn
+      readOnly: true
+    Parameter:
+      title: Parameter
+      type: object
+      additionalProperties: false
+      minProperties: 5
+      maxProperties: 5
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 4294967295
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        description:
+          type: string
+          minLength: 1
+          maxLength: 128
+          readOnly: true
+        modifiedBy:
+          $ref: '#/components/schemas/DeveloperReference'
+        modifiedOn:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - id
+        - name
+        - description
+        - modifiedBy
+        - modifiedOn
+      readOnly: true
+      description: The meta information about a parameter
+    ParameterType:
+      title: ParameterType
+      type: object
+      additionalProperties: false
+      minProperties: 5
+      maxProperties: 5
+      description: The meta information about a parameter type
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 4294967295
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        modifiedBy:
+          $ref: '#/components/schemas/DeveloperReference'
+        modifiedOn:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - id
+        - name
+        - modifiedBy
+        - modifiedOn
+      readOnly: true
+    LicenseReference:
+      type: object
+      title: LicenseReference
+      additionalProperties: false
+      minProperties: 3
+      maxProperties: 3
+      properties:
+        id:
+          type: string
+          minLength: 1
+          maxLength: 16
+          pattern: '^([a-z][a-z0-9]*)(-[a-z0-9]+)*$'
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          readOnly: true
+        uri:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+        - id
+        - name
+        - uri
+      readOnly: true
+      description: The reference to the license information. It contains an uri to the full representation of the license.
+    Error:
+      type: object
+      title: Error
+      description: The general information about an error
+      minProperties: 4
+      maxProperties: 4
+      additionalProperties: false
+      properties:
+        statusCode:
+          type: integer
+          minimum: 400
+          maximum: 600
+          format: int32
+          readOnly: true
+        message:
+          type: string
+          readOnly: true
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+        traceID:
+          type: integer
+          format: int64
+          minimum: 0
+          maximum: 18446744073709500000
+          description: A unique identifier of the trace that you can use to look for more information
+          readOnly: true
+      required:
+        - statusCode
+        - message
+        - timestamp
+        - traceID
+      readOnly: true
+  securitySchemes: {}
+  parameters:
+    id:
+      name: id
+      in: path
+      schema:
+        type: integer
+        maximum: 4294967295
+        minimum: 0
+        format: int32
+      description: A unique identifier for an entity as an integer
+      required: true
+    version:
+      name: version
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '(?<major>0|(?:[1-9]\d*))(?:\.(?<minor>0|(?:[1-9]\d*))(?:\.(?<patch>0|(?:[1-9]\d*))))'
+        minLength: 5
+        maxLength: 16
+      description: The semantic version number of an entity
+    label:
+      name: label
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^([a-z][a-z0-9]*)(-[a-z0-9]+)*$'
+        minLength: 1
+        maxLength: 64
+      description: A unique identifier for an entity as a string
+    page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 1
+        minimum: 1
+      description: The number of the page to select. The default is 1.
+    pageSize:
+      name: pageSize
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 12
+        minimum: 12
+        maximum: 60
+      description: The number of items on the page. The default value is 12. The maximum amount for a page is 60.
+    sortBy:
+      name: sortBy
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+        default: id
+      description: The name of the property to sort the items with. By default the id of the entity is used for sorting.
+    sortOrder:
+      name: sortOrder
+      in: query
+      required: false
+      schema:
+        type: string
+        default: asc
+        enum:
+          - asc
+          - desc
+        minLength: 3
+        maxLength: 4
+      description: The direction to sort the items. By default the items are sorted by ascending order
+  examples: {}
+  responses:
+    BadRequest:
+      description: The request was formatted incorrectly or missing required parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      headers: {}
+    NotFound:
+      description: The requested resource could not be found on the server
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+tags:
+  - name: application
+  - name: component
+  - name: developer
+  - name: license
+  - name: parameter
+  - name: system
+  - name: view
